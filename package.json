@@ -1,0 +1,18 @@
+{
+  "name": "kitchenomachia-academy",
+  "version": "1.0.0",
+  "description": "Kitchenomachia Academy is your ultimate online culinary classroom! Unlock your cooking potential with interactive courses, self-paced lessons, and fun quizzes. Complete a course, earn a certificate, and show the world you're a good chef!👨‍🍳🏆",
+  "main": "",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "keywords": ["web", "recipe", "tutorial", "learning", "online", "culinary", "cooking"],
+  "author": "Seth Hernandez <sethmichaelhernandez@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.24.0",
+    "eslint": "^9.24.0",
+    "globals": "^16.0.0"
+  }
+}
