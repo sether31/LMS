@@ -1,0 +1,140 @@
+/* fonts */
+@font-face {
+  font-family: 'rubik';
+  src: url('../../fonts/Rubik_Mono_One/RubikMonoOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: url('../../fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf') format('truetype');
+}
+
+
+*,
+*::before,
+*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+:root{
+  /* ?colors */
+  --primary: rgba(247, 242, 238, 1);
+  --secondary: rgba(200, 30, 77, 1);
+  --tertiary: rgba(106, 14, 39, 1);
+  --black: rgba(1, 1, 1, 1);
+  --white: rgba(255, 255, 255, 1);
+  --gray: rgba(113, 113, 113, 1);
+
+  --invalid: hsl(0, 100%, 63%);
+  --valid: rgb(50, 205, 50);
+
+  /* ?fonts */
+
+  /* font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+
+  /* font weight */
+  --fw-400: 400;
+  --fw-700: 700;
+  --fw-800: 800;
+  --fw-900: 900;
+  
+
+  /* ? */
+  --mt: 8rem;
+  --border-rad: .2rem;
+
+
+}
+
+::selection{
+  background-color: rgba(106, 14, 39, 1);
+  color: rgba(247, 242, 238, 1);
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* utilities */
+.container-xl{
+  width: min(1400px, 100%);
+  margin-inline: auto;
+}
+
+.container-lg{
+  width: min(1200px, 100%);
+  margin-inline: auto;
+}
+
+.container-md{
+  width: min(1100px, 100%);
+  margin-inline: auto;
+}
+.container-sm{
+  width: min(800px, 100%);
+  margin-inline: auto;
+}
+
+
+
+/* resets */
+
+body{
+  background-color: var(--primary);
+  color: var(--black);
+  font-family: roboto, sans-serif;
+  font-weight: var(--fw-400);
+  font-size: var(--text-md);
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5{
+  font-family: roboto;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: var(--text-3xl); 
+}
+
+h2 {
+  font-size: var(--text-2xl); 
+}
+
+h3 {
+  font-size: var(--text-xl); 
+}
+
+a{
+  text-decoration: none;
+  color: var(--black);
+}
+
+ul li{
+  list-style: none;
+}
+
+img{
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+button, a, input{
+  cursor: pointer;
+}
+
