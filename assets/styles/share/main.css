@@ -31,8 +31,8 @@ html{
   --white: rgba(255, 255, 255, 1);
   --gray: rgba(113, 113, 113, 1);
 
-  --invalid: hsl(0, 100%, 63%);
-  --valid: rgb(50, 205, 50);
+  --invalid: rgba(255, 66, 66, 1);
+  --valid: rgba(50, 205, 50, 1);
 
   /* ?fonts */
 
@@ -47,6 +47,8 @@ html{
 
   /* font weight */
   --fw-400: 400;
+  --fw-500: 500;
+  --fw-600: 600;
   --fw-700: 700;
   --fw-800: 800;
   --fw-900: 900;
@@ -55,8 +57,6 @@ html{
   /* ? */
   --mt: 8rem;
   --border-rad: .2rem;
-
-
 }
 
 ::selection{
