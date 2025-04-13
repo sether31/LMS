@@ -1,9 +1,11 @@
+<?php require '../../src/auth/signupValidation.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Kitchenomachia Academy</title>
   <link rel="stylesheet" href="../../assets/styles/signup.css">
 </head>
 <body>
@@ -18,72 +20,104 @@
           <h2 class="header">Create an account</h2>
         </div>
 
-        <form action="" method="post" class="signup-form" enctype="multipart/form-data">
+        <form action="../../src/auth/signupValidation.php" method="post" class="signup-form" enctype="multipart/form-data">
           <div class="mini-form-container">
             <div class="picture">
-              <label for="signup-picture">Picture:</label>
+              <label for="signup-picture">
+              Picture: 
+              <small class="error-msg">
+                <?php 
+                  if(isset($_SESSION['picture-error'])){
+                    echo "({$_SESSION['picture-error']})";
+                    unset($_SESSION['picture-error']);
+                  }
+                ?>
+              </small>
+              </label>
               <br>
-              <input type="file" name="signup-picture" id="signup-picture" accept="image/*" required>
+              <input type="file" name="signup-picture" id="signup-picture" accept="image/*" >
             </div>
 
             <div class="select-role">
-              <label for="signup-role">Select role:</label>
+              <label for="signup-role">
+              <span class="required">*</span> Select role:
+              </label>
               <select name="signup-role" id="signup-role" required>
                 <option value="student" selected>Student</option>
                 <option value="teacher">Teacher</option>
               </select>
             </div>
 
+            <div class="name">
+              <label for="signup-name" class="signup-name-label">
+              <span class="required">*</span > Name:
+              </label>
+              <div class="input-box">
+                <img src="../../assets/images/icons/icon-name.svg" alt="icon-name" class="icon">
+                <input type="text" name="signup-name" id="signup-name" minlength="10" placeholder="Enter your full name" required>
+              </div>
+            </div>
+
             <div class="bday">
-              <label for="signup-bday">Birthday:</label>
+              <label for="signup-bday">
+              <span class="required">*</span > Birthday: 
+              
+              </label>
+              <small class="error-msg">
+                <?php 
+                    if(isset($_SESSION['bday-error'])){
+                    echo "({$_SESSION['bday-error']})";
+                    unset($_SESSION['bday-error']);
+                  }
+                ?>
+              </small>
               <input type="date" name="signup-birthday" id="signup-bday" required>
             </div>
           </div>
 
-          <div class="input-box">
-            <img src="../../assets/images/icons/icon-email.svg" alt="icon-email" class="icon">
-            <input type="email" name="signup-email" id="signup-email" placeholder=" " required>
-            <label for="signup-email" class="signup-email-label">Email</label>
+          <div class="email">
+            <label for="signup-email" class="signup-email-label">
+            <span class="required">*</span> Email:
+            <small class="error-msg">
+              <?php 
+                if(isset($_SESSION['email-error'])){
+                  echo "({$_SESSION['email-error']})";
+                  unset($_SESSION['email-error']);
+                }
+              ?>
+            </small>
+            </label>
+            <div class="input-box">
+              <img src="../../assets/images/icons/icon-email.svg" alt="icon-email" class="icon">
+              <input type="email" name="signup-email" id="signup-email" placeholder="Enter your email" required>
+            </div>
           </div>
 
-          <div class="input-box">
-            <img src="../../assets/images/icons/icon-password.svg" alt="icon-password" class="icon">
-            <input type="password" name="signup-password" id="signup-password" placeholder=" " minlength="10" required>
-            <label for="signup-password" class="signup-password-label">Password</label>
+          <div class="password">
+          <label for="signup-password" class="signup-password-label">
+            <span class="required">*</span> Password:
+          </label>
+            <div class="input-box">
+              <img src="../../assets/images/icons/icon-password.svg" alt="icon-password" class="icon">
+              <input type="password" name="signup-password" id="signup-password" placeholder="Must be at least 10 characters" minlength="10" required>
+              <span class="eye">
+                <img src="../../assets/images/icons/icon-eye-show.svg" alt="icon-eye-show" class="eye-show">
+              </span>
+            </div>
           </div>
 
-          <button type="submit">Register</button>
+          <div class="buttons">
+            <button type="submit" name="register" class="btn">Register</button>
+            <a href="./login.php" class="btn login">
+              <button type="button">
+              Log in
+            </button>
+          </a>
+          </div>
         </form>
-
-        <div class="or">
-          <span class="line"></span>
-          or
-          <span class="line"></span>
-        </div>
-
-        <a href="./login.php" class="have-acc">Have an account? <span id="dont-have-acc">Log in</span></a>
-      </div>
     </article>
   </section>
 
-  <script>
-
-    const birthdayInput = document.getElementById('signup-bday');
-
-    const today = new Date();
-
-    const formattedDate = today.toISOString().split('T')[0];
-    
-    birthdayInput.addEventListener('change', ()=>{
-      let check = birthdayInput.value > formattedDate;
-      if(check){
-        document.querySelector('#signup-bday').style.borderColor = 'var(--invalid)';
-      } else{
-        document.querySelector('#signup-bday').style.borderColor = 'var(--valid)';
-      }
-    });
-
-
-  </script>
+  <script type="module" src="../../scripts/auth/signup.js"></script>
 </body>
 </html>
