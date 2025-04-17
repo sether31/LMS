@@ -30,12 +30,6 @@ input:-internal-autofill-selected {
   }
 }
 
-.text #logo{
-  width: 250px;
-  margin: auto;
-}
-  
-
 .login-container{
   height: 100vh;
   width: 100vw;
@@ -67,6 +61,11 @@ input:-internal-autofill-selected {
   gap: 1rem;
   height: 100%;
   padding: 1rem 3rem 0 0;
+}
+
+.login-left-section .text #logo{
+  width: 150px;
+  margin: 0 auto .5rem;
 }
 
 .login-left-section .login-form{
@@ -127,74 +126,31 @@ input:-internal-autofill-selected {
     }
   }
 
-  & .check-password{
+  & .actions{
     display: flex;
     align-items: center;
-    gap: .5rem;
-    margin-left: .8rem;
+    justify-content: space-between;
+    font-weight: var(--fw-400);
+
+    & .check-password{
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-left: .8rem;
+    }
+
+    & .forgot-password{
+      margin-right: .8rem;
+      transition: .3s ease-in-out;
+      &:hover{
+        color: var(--secondary);
+      }
+    }
   }
 
   & .buttons{
     display: flex;
     gap: 1rem;
-  }
-
-  & .btn{
-    width: 50%;
-    height: 2.8rem;
-    background-color: var(--black);
-    border: none;
-    color: var(--white);
-    font-size: var(--text-md);
-    font-weight: var(--fw-500);
-    border-radius: var(--border-rad);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    z-index: 0;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-
-    &::before{
-      content: "";
-      position: absolute;
-      background: var(--tertiary);
-      width: 0;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      transition: width 0.4s ease-in-out;
-    }
-  }
-
-  & .btn:hover::before{
-    width: 100%;
-  }
-
-  & .signup{
-    background-color: transparent;
-    color: var(--black);
-    border: 1px solid var(--tertiary);
-    display: grid;
-    place-items: center;
-
-    & button{
-      background-color: transparent;
-      border: none;
-      font-size: var(--text-md);
-      font-weight: var(--fw-500);
-    }
-
-    &:hover{
-      border-color: var(--tertiary);
-      & button{
-        color: var(--white);
-      }
-    }
-
-    &::before{
-      background: var(--tertiary);
-    }
   }
 }
 
@@ -202,6 +158,55 @@ input:-internal-autofill-selected {
 .error-msg{
   color: var(--invalid);
 }
+
+/* otp */
+.otp{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  padding: 1rem 3rem;
+  background-color: var(--white);
+  display: none;
+  gap: .5rem;
+  border-radius: .5rem;
+  border: 1px solid lightgray;
+
+  & .close{
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
+    padding: .1rem .4rem;
+    border-radius: 50%;
+    border: 1px solid lightgray;
+  }
+
+  & form{
+    display: grid;
+    gap: .5rem;
+
+    & label{
+      font-size: var(--text-lg);
+      font-weight: var(--fw-500);
+    }
+  
+    & input{
+      display: block;
+      padding: 0 2.3rem;
+      height: 2.8rem;
+      border-radius: var(--border-rad);
+      border: 2px solid var(--gray);
+    }
+  }
+}
+
+.otp.show{
+  display: grid;
+}
+
+
+
 
 /* ? media queries */
 
