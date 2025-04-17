@@ -6,9 +6,9 @@
   $password = $db_password;        
   $dbname = $db_name;
 
-  $conn = new mysqli($host, $username, $password, $dbname);
+  $conn = mysqli_connect($host, $username, $password, $dbname);
 
-  if ($conn === false) {
-      die("Connection failed: " . mysqli_connect_error());
+  if($conn === false){
+    die("Error: " . mysqli_connect_error());
   }
 ?>

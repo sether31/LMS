@@ -1,7 +1,7 @@
 {
   "name": "kitchenomachia-academy",
   "version": "1.0.0",
-  "description": "Kitchenomachia Academy is your ultimate online culinary classroom! Unlock your cooking potential with interactive courses, self-paced lessons, and fun quizzes. Complete a course, earn a certificate, and show the world you're a good chef!👨‍🍳🏆",
+  "description": "Kitchenomachia Academy is an online culinary classroom and can unlock your cooking potential with interactive courses, self-paced lessons, and fun quizzes. Complete a course and earn a certificate, and show the world you're a good chef!👨‍🍳🏆",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
