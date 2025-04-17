@@ -12,11 +12,11 @@
   <section class="signup-container">
     <article class="flex-container container-md">
       <div class="signup-left-section">
-        <img src="https://static.demilked.com/wp-content/uploads/2023/06/funny-programming-memes-7-640x711.jpeg" alt="">
+        <img src="../../assets/images/ka-poster.png" alt="ka-poster">
       </div>
       <div class="signup-right-section">
         <div class="text">
-          <img src="../../assets/images/logo/logo-example.png" alt="logo" id="logo">
+          <img src="../../assets/images/logo/logo-w-text.png" alt="logo" id="logo">
           <h2 class="header">Create an account</h2>
         </div>
 
@@ -107,12 +107,10 @@
           </div>
 
           <div class="buttons">
-            <button type="submit" name="register" class="btn">Register</button>
-            <a href="./login.php" class="btn login">
-              <button type="button">
-              Log in
+            <button type="submit" name="register" class="btn-primary">Register</button>
+            <button type="button" class="btn-secondary">
+              <a href="./login.php">Log in</a>
             </button>
-          </a>
           </div>
         </form>
     </article>

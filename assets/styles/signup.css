@@ -23,6 +23,7 @@ body{
 
   & .flex-container{
     display: flex;
+    align-items: center;
     padding: 0 2rem;
 
     & > div{
@@ -37,6 +38,11 @@ body{
   gap: 1rem;
   height: 100%;
   padding: 1rem 0 0 3rem;
+}
+
+.signup-right-section .text #logo{
+  width: 150px;
+  margin-bottom: .5rem;
 }
 
 .signup-right-section 
@@ -96,65 +102,6 @@ body{
   & .buttons{
     display: flex;
     gap: 1rem;
-  }
-
-  & .btn {
-    width: 50%;
-    height: 2.8rem;
-    background-color: var(--black);
-    border: none;
-    color: var(--white);
-    font-size: var(--text-md);
-    font-weight: var(--fw-500);
-    border-radius: var(--border-rad);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    z-index: 0;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-
-
-    &::before {
-      content: "";
-      position: absolute;
-      background: var(--tertiary);
-      width: 0;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      transition: width 0.4s ease-in-out;
-    }
-  }
-
-  & .btn:hover::before {
-    width: 100%;
-  }
-
-  & .login{
-    background-color: transparent;
-    color: var(--black);
-    border: 1px solid var(--tertiary);
-    display: grid;
-    place-items: center;
-
-    & button{
-      background-color: transparent;
-      border: none;
-      font-size: var(--text-md);
-      font-weight: var(--fw-500);
-    }
-
-    &:hover{
-      border-color: var(--tertiary);
-      & button{
-        color: var(--white);
-      }
-    }
-
-    &::before {
-      background: var(--tertiary);
-    }
   }
 }
 
