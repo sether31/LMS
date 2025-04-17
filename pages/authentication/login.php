@@ -13,7 +13,7 @@
     <article class="flex-container container-md">
       <div class="login-left-section">
         <div class="text">
-          <img src="../../assets/images/logo/logo-example.png" alt="logo" id="logo">
+          <img src="../../assets/images/logo/logo-w-text.png" alt="logo" id="logo">
           <h1 class="header">Welcome back, Chef!</h1>
           <i class="sub-header">
             One <span>module</span> at a time, one <span>flavor</span> at a time. <span >Let’s rise!</span>
@@ -59,26 +59,52 @@
             ?>
           </small>
 
-          <div class="check-password">
-            <input type="checkbox" name="check-password" id="check-password">
-            <label for="check-password">Check password</label>
+          <div class="actions">
+            <div class="check-password">
+              <input type="checkbox" name="check-password" id="check-password">
+              <label for="check-password">Check password</label>
+            </div>
+
+            <a href="./forgotPassword.php" class="forgot-password">Forgot Password?</a>
           </div>
 
           <div class="buttons">
-            <button type="submit" class="btn">Log in</button>
-            <a href="./signup.php" class="btn signup">
-              <button type="button">
-                Sign up
+            <button type="submit" class="btn-primary">Log in</button>
+            <button type="button" class="btn-secondary">
+                <a href="./signup.php">
+                  Sign up
+                </a>
               </button>
-            </a>
           </div>
         </form>
       </div>
       <div class="login-right-section">
-        <img src="https://static.demilked.com/wp-content/uploads/2023/06/funny-programming-memes-7-640x711.jpeg" alt="">
+        <img src="../../assets/images/ka-poster.png" alt="ka-poster">
       </div> 
     </article>
   </section>
+
+
+  <div class="otp <?php echo isset($_SESSION['otp-pop']) ? 'show' : ''; ?>">
+    <span class="close">X</span>
+    <form method="POST" action="">
+      <label for="otp">
+        Enter OTP
+        <span class="required">(5)</span>: 
+      </label>
+      <small class="error-msg">
+          <?php 
+            if(isset($_SESSION['otp-error'])){
+              echo "({$_SESSION['otp-error']})";
+              unset($_SESSION['otp-error']);
+            }
+          ?>
+      </small>
+      <input type="number" name="otp" id="otp" placeholder="example: 80165" required>
+      <button type="submit" class="btn-primary">Verify</button>
+    </form>
+  </div>
+
 
   <script type="module" src="../../scripts/auth/login.js"></script>
 </body>
