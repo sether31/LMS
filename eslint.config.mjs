@@ -11,7 +11,6 @@ export default defineConfig([
   { files: ["**/*.{js,mjs,cjs}"], languageOptions: { globals: globals.browser } },
   {
     rules:{
-      "capitalized-comments": ["error", "always"],
       "camelcase": ["error", {"properties": "never"}],
       "eqeqeq": ["error", "always"],
       "no-unused-vars": "error",
