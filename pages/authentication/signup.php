@@ -12,7 +12,7 @@
   <section class="signup-container">
     <article class="flex-container container-md">
       <div class="signup-left-section">
-        <img src="../../assets/images/ka-poster.png" alt="ka-poster">
+        <img src="../../assets/images/ka-poster.jpg" alt="ka-poster">
       </div>
       <div class="signup-right-section">
         <div class="text">

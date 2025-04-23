@@ -79,7 +79,7 @@
         </form>
       </div>
       <div class="login-right-section">
-        <img src="../../assets/images/ka-poster.png" alt="ka-poster">
+        <img src="../../assets/images/ka-poster.jpg" alt="ka-poster">
       </div> 
     </article>
   </section>

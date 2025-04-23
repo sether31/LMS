@@ -202,6 +202,10 @@ form{
       font-weight: var(--fw-500);
     }
   }
+  & .btn-primary{
+    height: 3.8rem;
+    font-size: var(--text-lg);
+  }
 }
 
 .hr{
@@ -214,9 +218,48 @@ form{
   color: var(--gray);
 }
 
+.delete-lesson-form{
+  margin: 1rem auto 0;
+  width: max-content;
+  padding: .8rem 1rem;
+  border-radius: .5rem;
+  background-color: var(--invalid);
+  transition: .3s ease-in-out;
+
+  &:hover{
+    opacity: .9;
+  }
+
+  & .delete-lesson{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: var(--text-lg);
+    color: var(--white);
+    background: none; 
+    border: none; 
+    padding: 0; 
+    
+    & img{
+      width: var(--text-xl);
+    }
+  }
+}
+
 
 @media screen and (max-width: 768px){
   .media-container{
     flex-direction: column;
+  }
+
+  .delete-lesson-form{
+    width: 100%!important;
+    padding: .8rem 0;
+
+    & .delete-lesson{
+      width:100%;
+      justify-content:center!important;
+      align-items:center!important;
+    }
   }
 }

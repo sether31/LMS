@@ -54,6 +54,8 @@ fieldset{
 
     & .btn-primary{
       grid-area: btn;
+      height: 3.8rem;
+      font-size: var(--text-lg);
     }
 
     & .input-box{

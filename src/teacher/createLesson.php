@@ -35,12 +35,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
           $sql = "insert into lesson_image_tb (lesson_id, image_path) values ('$lesson_id', '$check_image')";
           mysqli_query($conn, $sql);
         } else{
-          $_SESSION['lesson-error'] = "Failed to upload the image. Please try again.";
+          $_SESSION['lesson-create-image-failed'] = "Failed to upload the image. Please try again.";
           header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
           exit();
         }
       } else{
-        $_SESSION['lesson-error'] = "Image is too large (max 10MB).";
+        $_SESSION['lesson-create-image-failed'] = "Image is too large (max 10MB).";
         header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
         exit();
       }
@@ -52,28 +52,30 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
       if($_FILES['lesson-video']['size'] <= $maxFileSize){
         $video_tmp_path = $_FILES['lesson-video']['tmp_name'];
         $video_name = $_FILES['lesson-video']['name'];
-        $check_video = '../../data/teacher/lesson/lesson-video/' . $video_name;
+        $directory = '../../';
+        $check_video = 'data/teacher/lesson/lesson-video/' . $video_name;
+        $directory .= $check_video;
 
-        if(move_uploaded_file($video_tmp_path, $check_video)) {
+        if(move_uploaded_file($video_tmp_path, $directory)) {
           $sql = "insert into lesson_video_tb (lesson_id, video_path) values ('$lesson_id', '$check_video')";
           mysqli_query($conn, $sql);
         } else{
-          $_SESSION['lesson-error'] = "Failed to upload the video. Please try again.";
+          $_SESSION['lesson-create-video-failed'] = "Failed to upload the video. Please try again.";
           header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
           exit();
         }
       } else{
-        $_SESSION['lesson-error'] = "Video is too large (max 100MB).";
+        $_SESSION['lesson-create-video-failed'] = "Video is too large (max 100MB).";
         header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
         exit();
       }
     }
 
-    $_SESSION['lesson-success'] = "Lesson created successfully!";
+    $_SESSION['lesson-create-success'] = "Lesson created successfully!";
     header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
     exit();
   } else{
-    $_SESSION['lesson-error'] = "Create lesson failed.";
+    $_SESSION['lesson-create-error'] = "Create lesson failed.";
     header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
     exit();
   }

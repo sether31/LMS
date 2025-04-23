@@ -167,6 +167,10 @@
         font-weight: var(--fw-500);
       }
     }
+    & .btn-primary{
+      height: 3.8rem;
+      font-size: var(--text-lg);
+    }
   }
 }
 
@@ -211,6 +215,10 @@
       font-size: var(--text-lg);
       font-weight: var(--fw-500);
     }
+  }
+  & .btn-primary{
+    height: 3.8rem;
+    font-size: var(--text-lg);
   }
 }
 
@@ -321,6 +329,11 @@
             font-weight: var(--fw-500);
           }
         }
+
+        & .btn-primary{
+          height: 3.8rem;
+          font-size: var(--text-lg);
+        }
       }  
     }
 
@@ -347,6 +360,9 @@
           gap: .5rem;
           font-size: var(--text-lg);
           color: var(--white);
+          background: none; 
+          border: none; 
+          padding: 0; 
           
           & img{
             width: var(--text-xl);
@@ -399,6 +415,9 @@
     gap: .5rem;
     font-size: var(--text-lg);
     color: var(--white);
+    background: none; 
+    border: none; 
+    padding: 0; 
     
     & img{
       width: var(--text-xl);

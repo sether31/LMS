@@ -75,6 +75,87 @@
     ";
     unset($_SESSION['lesson-video-error']);
   }
+
+  // lesson create message
+  if(isset($_SESSION['lesson-create-success'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['lesson-create-success']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['lesson-create-success']);
+  }
+
+  if(isset($_SESSION['lesson-create-failed'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['lesson-create-failed']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['lesson-create-failed']);
+  } 
+
+  if(isset($_SESSION['lesson-create-video-failed'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['lesson-create-video-failed']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['lesson-create-video-failed']);
+  }
+  
+  if(isset($_SESSION['lesson-create-success-failed'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['lesson-create-success-failed']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['lesson-create-success-failed']);
+  }
+
+  // lesson  message
+  if(isset($_SESSION['lesson-delete-success'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['lesson-delete-success']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['lesson-delete-success']);
+  }
+
+  if(isset($_SESSION['lesson-delete-failed'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['lesson-delete-failed']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['lesson-delete-failed']);
+  }
+
+  if(isset($_SESSION['lesson-delete-error'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['lesson-delete-error']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['lesson-delete-error']);
+  }
+   
+
 ?>
 
 <!DOCTYPE html>
@@ -157,7 +238,7 @@
           <div class="accordion-content">
             <form method="POST" action="../../../src/teacher/updateLesson.php?courseId=<?php echo $get_course_id ?>&moduleId=<?php echo $get_module_id ?>" enctype="multipart/form-data">
 
-            <input type="hidden" name="lesson-id" value="<?php echo $lesson_id ?>">
+              <input type="hidden" name="lesson-id" value="<?php echo $lesson_id ?>">
 
               <div class="media-container">
                 <div class=" image">
@@ -222,6 +303,17 @@
               </div>
 
               <button type="submit" class="btn-primary">Save and Display</button>
+            </form>
+
+             <!-- delete lesson -->
+             <form action="../../../src/teacher/deleteLesson.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this Lesson?');" class="delete-lesson-form">      
+              <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
+              <input type="hidden" name="module-id" value="<?php echo $get_module_id ?>">
+              <input type="hidden" name="lesson-id" value="<?php echo $lesson_id ?>">
+              <button type="submit" class="delete-lesson">
+                <img src="../../../assets/images/icons/icon-delete.svg" alt="Delete icon">
+                Delete Lesson
+              </button>
             </form>
           </div>
         </div>

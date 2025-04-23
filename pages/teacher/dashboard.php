@@ -22,7 +22,8 @@
       <nav class="nav">
         <a class="active">Dashboard</a>
         <a href="./course/myCourse.php">My Courses</a>
-        <a>Profile</a>
+        <a href="./profile.php">Profile</a>
+        <a href="../../src/auth/logout.php">Logout</a>
       </nav>
     </section>
   </header>

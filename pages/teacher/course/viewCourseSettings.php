@@ -108,8 +108,6 @@
     ";
     unset($_SESSION['module-delete-failed']);
   }
-  
-  
 ?>
 
 <!DOCTYPE html>
@@ -149,10 +147,7 @@
   </div>
 
   <aside class="sidebar">
-    <section class="logo">
-    
-    </section>
-
+    <span></span>
     <nav>
       <ul>
         <li class="main-list">
@@ -215,7 +210,7 @@
         <nav>
           <a href="./viewCourse.php?courseId=<?php echo $get_course_id ?>">Course</a>
           <a href="" class="active">Settings</a>
-          <a href="./viewCourseParticipants.php?courseId=<?php echo $get_course_id ?>">Participants</a>
+          <a href="./participants.php?courseId=<?php echo $get_course_id ?>">Participants</a>
         </nav>
       </div>
       <div class="course-container">
@@ -359,7 +354,7 @@
                       
                       <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
                       <input type="hidden" name="module-id" value="<?php echo $module_id ?>">
-                      <button type="submit" class="delete-module" style="background: none; border: none; padding: 0; cursor: pointer;">
+                      <button type="submit" class="delete-module">
                         <img src="../../../assets/images/icons/icon-delete.svg" alt="Delete icon">
                         Delete Module
                       </button>
@@ -384,7 +379,7 @@
         <form action="../../../src/teacher/deleteCourse.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this course?');" class="delete-course-form">
           
           <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
-          <button type="submit" class="delete-course" style="background: none; border: none; padding: 0; cursor: pointer;">
+          <button type="submit" class="delete-course">
             <img src="../../../assets/images/icons/icon-delete.svg" alt="Delete icon">
             Delete Course
           </button>

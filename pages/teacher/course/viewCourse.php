@@ -34,7 +34,7 @@ $get_course_id = $_GET['courseId'];
       <nav class="nav">
         <a href="../dashboard.php">Dashboard</a>
         <a href="./myCourse.php" class="active">My Courses</a>
-        <a>Profile</a>
+        <a href="../profile.php">Profile</a>
         <a href="../../../src/auth/logout.php">Logout</a>
       </nav>
     </section>
@@ -113,7 +113,7 @@ $get_course_id = $_GET['courseId'];
         <nav>
           <a href="" class="active">Course</a>
           <a href="./viewCourseSettings.php?courseId=<?php echo $_GET['courseId']?>">Settings</a>
-          <a href="./viewCourseParticipants.php?courseId=<?php echo $_GET['courseId']?>">Participants</a>
+          <a href="./participants.php?courseId=<?php echo $_GET['courseId']?>">Participants</a>
         </nav>
       </div>
       <div class="course-container">

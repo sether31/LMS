@@ -23,7 +23,7 @@
       <nav class="nav">
         <a href="../dashboard.php">Dashboard</a>
         <a class="active">My Courses</a>
-        <a>Profile</a>
+        <a href="../myCourse.php">Profile</a>
         <a href="../../../src/auth/logout.php">Logout</a>
       </nav>
     </section>
