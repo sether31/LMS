@@ -1,0 +1,222 @@
+@import '../../share/main.css';
+
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  & .create-lesson-btn{
+    display: block;
+    width: max-content;
+    border-radius: .5rem;
+    padding: .8rem 1rem;
+    background-color: var(--black);
+    color: var(--white);
+    transition: .3s ease-in-out;
+  
+    &:hover{
+      background-color: var(--secondary);
+    }
+  }
+}
+
+.back{
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-500);
+  position: absolute;
+  top: 1rem;
+  left: 5%;
+}
+
+.content-container{
+  margin-block: 6rem 4rem;
+  padding-inline: 2rem;
+  transition: transform .3s ease-in-out;
+  transform: translateX(0);
+
+  & .wrapper{
+    & .module{
+      margin-bottom: 3rem;
+      & .title{
+        margin-bottom: 1rem;
+        display: flex;
+        gap: .5rem;
+
+        & img{
+          width: var(--text-3xl);
+        }
+      }
+
+      & .description{
+        text-indent: 1rem;
+      }
+    }
+
+    & .accordion-container{
+      width: 100%;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+  
+      & .accordion-item{
+        border-bottom: 1px solid #eaeaea;
+  
+        & .accordion-title{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1.5rem 2rem;
+          font-size: var(--text-xl);
+          font-weight: var(--fw-500);
+          cursor: pointer;
+          position: relative;
+          transition: .3s ease-in-out;
+  
+          &:hover{
+            background-color: #f9f9f9;
+          }
+  
+          & span{
+            display: flex;
+            gap: .5rem;
+  
+            & img{
+              width: var(--text-2xl);
+            }
+          }
+        }
+      }
+  
+      & .accordion-title::after{
+        content: '▼';
+        font-size: 1rem;
+        transition: .3s ease-in-out;
+      }
+  
+      & input[type="checkbox"]{
+        display: none;
+      }
+  
+      & .accordion-content{
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 2rem;
+        color: var(--black);
+        transition: .3s ease-in-out;
+      }
+  
+      & input[type="checkbox"]:checked ~ .accordion-content{
+        max-height: max-content;
+        padding-block: 2rem;
+      }
+  
+      & input[type="checkbox"]:checked + .accordion-title::after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+form{
+  display: grid;
+  gap: 1rem;
+
+  & .media-container{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  
+    & .image{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+
+      & img{
+        display: block;
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: .5rem;
+      }
+    }
+    
+    & .video{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+
+      & video{
+        display: block;
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: .5rem;
+      }
+    }
+
+    & .input-box{
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+
+  & .input-box{
+    display: grid;
+    gap: .5rem;
+
+    & input{
+      display: block;
+      width: 100%;
+      padding: .8rem 1rem;
+      border-radius: var(--border-rad);
+      border: 1px solid lightgray;
+      font-size: var(--text-md);
+      font-weight: var(--fw-500);
+
+      &:focus{
+        outline: 1px solid var(--secondary);
+      }
+    }
+
+    & textarea{
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      height: 150px;
+      resize: vertical;
+      border-radius: var(--border-rad);
+      border: 1px solid lightgray;
+
+      &:focus{
+        outline: 1px solid var(--secondary);
+      }
+    }
+
+    & label{
+      font-size: var(--text-lg);
+      font-weight: var(--fw-500);
+    }
+  }
+}
+
+.hr{
+  border: 1px dashed #eaeaea;
+  margin-bottom: 1rem;
+}
+
+.desc{
+  margin-block:3rem 1rem;
+  color: var(--gray);
+}
+
+
+@media screen and (max-width: 768px){
+  .media-container{
+    flex-direction: column;
+  }
+}
