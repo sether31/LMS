@@ -1,2 +1,24 @@
 @import '../share/main.css';
 @import '../share/navbar.css';
+
+
+
+
+.grid-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 7rem auto 0;
+}
+
+.box {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 150px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+

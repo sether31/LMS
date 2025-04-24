@@ -108,6 +108,52 @@
     ";
     unset($_SESSION['module-delete-failed']);
   }
+
+  // publish message
+  if(isset($_SESSION['course-change-status-success'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['course-change-status-success']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['course-change-status-success']);
+  }
+
+  if(isset($_SESSION['course-change-status-failed'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['course-change-status-failed']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['course-change-status-failed']);
+  }
+
+  // active module
+  if(isset($_SESSION['module-change-status-success'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['module-change-status-success']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['module-change-status-success']);
+  }
+
+  if(isset($_SESSION['module-change-status-failed'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['module-change-status-failed']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['module-change-status-failed']);
+  }
 ?>
 
 <!DOCTYPE html>
@@ -134,7 +180,7 @@
       <nav class="nav">
         <a href="../dashboard.php">Dashboard</a>
         <a href="./myCourse.php" class="active">My Courses</a>
-        <a>Profile</a>
+        <a href="../profile.php">Profile</a>
         <a href="../../../src/auth/logout.php">Logout</a>
       </nav>
     </section>
@@ -220,10 +266,16 @@
           <?php
             $sql = "select * from course_tb where course_id = '$get_course_id'";
             $container = mysqli_query($conn, $sql);
-            $container = mysqli_fetch_array($container);
-            $course_title = $container['title'];
-            $course_description = $container['description'];
-            $course_picture = $container['course_image'];
+
+            if(mysqli_num_rows($container) > 0){
+              $container = mysqli_fetch_array($container);
+              $course_title = $container['title'];
+              $course_description = $container['description'];
+              $course_picture = $container['course_image'];
+            } else{
+                header('Location: ../../../pages/teacher/course.php?courseId=$get_course_id');
+                exit();
+            }
           ?>
 
             <!-- update course -->
@@ -310,6 +362,7 @@
               $module_id = $row['module_id'];
               $module_title = $row['title'];
               $module_description = $row['description'];
+              $module_status = $row['status'];
           ?>    
 
             <!-- update module -->
@@ -345,17 +398,29 @@
                   <br><br>
                 
                   <div class="flex">
+                    <form action="../../../src/teacher/moduleStatus.php" method="POST" onsubmit="return confirm('Are you sure you want to publish this course?');" class="module-status-form">
+                      <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
+                      <input type="hidden" name="module-status" value="<?php echo $module_status ?>">
+
+                      <button type="submit" class="status-module">
+                        <img src="../../../assets/images/icons/icon-publish.svg" alt="icon-active">
+                        <?php echo ($module_status === 'active') ? 'Inactive Module' : 'Active Module'; ?>
+                      </button>
+                    </form>
+
+
                     <a href="./viewLesson.php?courseId=<?php echo $get_course_id;?>&moduleId=<?php echo $module_id;?>" class="view-lesson-btn">
-                      View All lessons
+                      <span>
+                        <img src="../../../assets/images/icons/icon-view.svg" alt="icon-view">
+                        View All lessons
+                      </span>
                     </a>
 
-                    <!-- delete module -->
                     <form action="../../../src/teacher/deleteModule.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this module?');" class="delete-module-form">
-                      
                       <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
                       <input type="hidden" name="module-id" value="<?php echo $module_id ?>">
                       <button type="submit" class="delete-module">
-                        <img src="../../../assets/images/icons/icon-delete.svg" alt="Delete icon">
+                        <img src="../../../assets/images/icons/icon-delete.svg" alt="icon-delete">
                         Delete Module
                       </button>
                     </form>
@@ -375,15 +440,36 @@
           ?>
         </div>
 
-        <!-- delete course -->
-        <form action="../../../src/teacher/deleteCourse.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this course?');" class="delete-course-form">
-          
-          <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
-          <button type="submit" class="delete-course">
-            <img src="../../../assets/images/icons/icon-delete.svg" alt="Delete icon">
-            Delete Course
-          </button>
-        </form>
+        <hr class="hr" style="margin-top: 5rem;">
+
+        <div class="flex-2">
+          <?php
+            $sql = "select status from course_tb where course_id = '$get_course_id'";
+            $container = mysqli_query($conn, $sql);
+
+            if(mysqli_num_rows($container) > 0):
+              $container = mysqli_fetch_array($container);
+          ?>
+
+          <form action="../../../src/teacher/courseStatus.php" method="POST" onsubmit="return confirm('Are you sure you want to publish this course?');" class="publish-course-form">
+            <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
+            <input type="hidden" name="course-status" value="<?php echo $container['status'] ?>">
+
+            <button type="submit" class="publish-course">
+              <img src="../../../assets/images/icons/icon-publish.svg" alt="icon-publish">
+              <?php echo ($container['status'] === 'publish') ? 'Unpublish Course' : 'Publish Course'; ?>
+            </button>
+          </form>
+
+          <form action="../../../src/teacher/deleteCourse.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this course?');" class="delete-course-form">
+            <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
+            <button type="submit" class="delete-course">
+              <img src="../../../assets/images/icons/icon-delete.svg" alt="icon-delete">
+              Delete Course
+            </button>
+          </form>
+        </div>
+        <?php endif;?>
 
 
       </div>

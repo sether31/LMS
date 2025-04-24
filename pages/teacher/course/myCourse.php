@@ -1,4 +1,4 @@
-<?php include '../../../src/teacher/createCourse.php'; ?>
+ <?php include '../../../src/teacher/createCourse.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +23,7 @@
       <nav class="nav">
         <a href="../dashboard.php">Dashboard</a>
         <a class="active">My Courses</a>
-        <a href="../myCourse.php">Profile</a>
+        <a href="../profile.php">Profile</a>
         <a href="../../../src/auth/logout.php">Logout</a>
       </nav>
     </section>
@@ -58,6 +58,7 @@
               $course_title = ucwords($row['title']);
               $course_description = ucfirst($row['description']);
               $course_picture = $row['course_image']; 
+              $course_status = strtoupper($row['status']);
               $title_length = 50;
               $description_length = 20;
 
@@ -71,6 +72,7 @@
 
               echo "
                 <article class='card'>
+                  <p class='publish'>{$course_status}</p>
                   <div class='card-image'>
                     <a href='./viewCourse.php?courseId={$row['course_id']}'>
                       <img src='../../../{$course_picture}' alt='course_picture'>

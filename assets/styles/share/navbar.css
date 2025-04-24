@@ -123,7 +123,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  /* navbar */
   #navbar-burger{
     display: block;
   }

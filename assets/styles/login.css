@@ -167,11 +167,11 @@ input:-internal-autofill-selected {
   transform: translate(-50%, -50%);
   width: max-content;
   padding: 1rem 3rem;
-  background-color: var(--white);
   display: none;
   gap: .5rem;
   border-radius: .5rem;
   border: 1px solid lightgray;
+  background:var(--white);
 
   & .close{
     position: absolute;

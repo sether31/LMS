@@ -1,4 +1,3 @@
-/* sidebar */
 .sidebar-hamburger-btn{
   height: 50px;
   aspect-ratio: 1;
@@ -186,3 +185,53 @@
 }
 
 
+
+@media screen and (max-width: 500px){
+
+  .sidebar-hamburger-btn{
+    top: unset;
+    bottom: 100px;
+    left: -5px;
+  
+    & span{
+      position: absolute;
+      width: 60%;
+      height: 5px;
+      border-radius: 2px;
+      background-color: var(--white);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: .3s ease-in-out;
+    }
+  
+    & span:nth-child(1){
+      top: 25%;
+    }
+  
+    & span:nth-child(3){
+      top: 75%;
+    }
+  }
+  
+  .sidebar-hamburger-btn.click{
+    height: 40px;
+    background-color: var(--secondary);
+    left: 2rem;
+    z-index: 100;
+  
+    & span:nth-child(1){
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  
+    & span:nth-child(2){
+      display: none;
+    }
+  
+    & span:nth-child(3){
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  }
+}

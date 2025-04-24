@@ -91,6 +91,18 @@
       border: 1px solid lightgray;
       opacity: 1;
       transition: opacity 0.3s ease-in-out;
+      position: relative;
+
+      & .publish{
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: var(--white);
+        background-color: var(--secondary);
+        padding: .8rem 1rem;
+        border-radius: 0 .5rem 0 0;
+        z-index: 10;
+      }
     
       &:hover{
         & .card-image img{

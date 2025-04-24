@@ -22,9 +22,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $check_image = null;
   if(isset($_FILES['signup-picture']) && $_FILES['signup-picture']['error'] === UPLOAD_ERR_OK){
 
-    $maxFileSize = 5 * 1024 * 1024;
+    $maxFileSize = 10 * 1024 * 1024;
     if($_FILES['signup-picture']['size'] > $maxFileSize){
-      $_SESSION['picture-error'] = "Image is too large. Maximum size is 5MB.";
+      $_SESSION['picture-error'] = "Image is too large. Maximum size is 10MB.";
       $isError = true;
     }
 
