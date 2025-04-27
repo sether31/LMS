@@ -1,2 +1,78 @@
 @import '../share/main.css';
 @import '../share/navbar.css';
+
+.container-sm .wrapper{
+  margin-block: 7rem;
+
+  & .header{
+    text-align: center;
+
+    & .profile-picture{
+      display: block;
+      margin: 2rem auto;
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+  }
+
+  & .profile-info{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    margin-block: 2rem;
+
+    & .info {
+      flex: 1;
+      padding: 1rem;
+
+      & h3{
+        color: #333;
+        margin-bottom: .5rem;
+      }
+
+      & p{
+        font-size: 1rem;
+        color: var(--gray);
+      }
+    }
+  }
+
+  & .edit-profile-form{
+    padding: 2rem;
+    border-radius: .5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    & h3{
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    & label{
+      color: #333;
+      display: block;
+      margin-bottom: .5rem;
+    }
+
+    & input[type="text"],
+    & input[type="email"],
+    & input[type="file"],
+    & button{
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    & button{
+      display: block;
+      width: max-content;
+      margin: auto;
+    }
+  }
+} 
+
