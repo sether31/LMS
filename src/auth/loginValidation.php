@@ -12,12 +12,11 @@ if(isset($_SESSION['register-success'])){
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && 
-  isset($_POST['login-email'], $_POST['login-password'], $_POST['login-role'])){
+  isset($_POST['login-email'], $_POST['login-password'])){
   $login_email = $_POST['login-email'];
   $login_password = $_POST['login-password'];
-  $login_role = $_POST['login-role'];
 
-  $sql = "select user_id, name, email, password, role from user_tb where email = '$login_email' and role = '$login_role'";
+  $sql = "select user_id, name, email, password, role from user_tb where email = '$login_email'";
   $container = mysqli_query($conn , $sql);
 
   if($container && mysqli_num_rows($container) > 0){
