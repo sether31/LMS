@@ -168,7 +168,7 @@
       }
     }
     & .btn-primary{
-      height: 3.8rem;
+      height: 3rem;
       font-size: var(--text-lg);
     }
   }
@@ -217,7 +217,7 @@
     }
   }
   & .btn-primary{
-    height: 3.8rem;
+    height: 3rem;
     font-size: var(--text-lg);
   }
 }
@@ -331,7 +331,7 @@
         }
 
         & .btn-primary{
-          height: 3.8rem;
+          height: 3rem;
           font-size: var(--text-lg);
         }
       }  
@@ -357,14 +357,14 @@
         & .status-module{
           display: flex;
           gap: .5rem;
-          font-size: var(--text-lg);
+          font-size: var(--text-md);
           color: var(--white);
           background: none; 
           border: none; 
           padding: 0; 
           
           & img{
-            width: var(--text-xl);
+            width: var(--text-lg);
           }
         }
       }
@@ -382,15 +382,16 @@
       
         & .delete-module{
           display: flex;
+          align-items: center;
           gap: .5rem;
-          font-size: var(--text-lg);
+          font-size: var(--text-md);
           color: var(--white);
           background: none; 
           border: none; 
           padding: 0; 
           
           & img{
-            width: var(--text-xl);
+            width: var(--text-lg);
           }
         }
       }
@@ -400,7 +401,7 @@
         width: max-content;
         border-radius: .5rem;
         padding: .8rem 1rem;
-        font-size: var(--text-lg);
+        font-size: var(--text-md);
         background-color: var(--black);
         color: var(--white);
         transition: .3s ease-in-out;
@@ -414,7 +415,7 @@
           gap: .5rem;
 
           & img{
-            width: var(--text-xl);
+            width: var(--text-lg);
           }
         }
       }
@@ -454,14 +455,14 @@
       display: flex;
       align-items: center;
       gap: .5rem;
-      font-size: var(--text-lg);
+      font-size: var(--text-md);
       color: var(--white);
       background: none; 
       border: none; 
       padding: 0; 
       
       & img{
-        width: var(--text-xl);
+        width: var(--text-lg);
       }
     }
   }
@@ -483,14 +484,14 @@
       display: flex;
       align-items: center;
       gap: .5rem;
-      font-size: var(--text-lg);
+      font-size: var(--text-md);
       background: none; 
       border: none; 
       padding: 0; 
       color: var(--white);
 
       & img{
-        width: var(--text-xl);
+        width: var(--text-lg);
       }
     }
   }

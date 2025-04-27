@@ -6,21 +6,23 @@ if(!isset($_SESSION['user-id'])){
   die("Access denied. Please log in.");
 }
 
+
+
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['course-id'])){
   $course_id = $_POST['course-id'];
-  $sql = "update course_tb set is_delete = 1 where course_id = '$course_id'";
+  $sql = "update course_tb set is_delete = 0 where course_id = '$course_id'";
   $container = mysqli_query($conn, $sql);
 
   if($container){
-      $_SESSION['delete-course-success'] = "Course deleted successfully.";
+      $_SESSION['recover-course-success'] = "Course recovered successfully.";
   } else{
-      $_SESSION['delete-course-failed'] = "Course delete failed: " . mysqli_error($conn);
+      $_SESSION['recover-course-failed'] = "Course recover failed: " . mysqli_error($conn);
   }
 
   header("Location: ../../pages/teacher/course/myCourse.php");
   exit();
 } else{
-  $_SESSION['delete-course-error'] = "error";
+  $_SESSION['recover-course-error'] = "error";
   header("Location: ../../pages/teacher/course/myCourse.php");
   exit();
 }

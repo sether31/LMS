@@ -41,7 +41,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
       }
     }
   } else{
-    echo "error image. please try again.";
+    $_SESSION['create-image-error'] = "error";
   }
 }
 ?>

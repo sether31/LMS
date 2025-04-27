@@ -47,7 +47,7 @@ $get_course_id = $_GET['courseId'];
   </div>
 
   <aside class="sidebar">
-    <section class="logo">
+    <section>
     
     </section>
 

@@ -1,0 +1,163 @@
+@import '../../share/main.css';
+
+
+.back{
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-500);
+  position: absolute;
+  top: 1rem;
+  left: 5%;
+}
+
+
+
+.quiz-container{
+  margin: 3rem auto 5rem;
+  padding: 2rem;
+
+  & h3{
+    text-align: center;
+  }
+
+  & .title{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 3rem 2rem 1rem;
+    padding-inline: 1rem;
+    
+    & label{
+      font-weight: var(--fw-500);
+      margin-inline: 1rem;
+    }
+
+    & #title{
+      width: 100%;
+      padding: .7rem .5rem;
+      border-radius: .5rem;
+      border: 1px solid lightgray;
+      margin-inline: 1rem;
+    }
+  }
+
+  #quiz-form{
+    display: grid;
+    gap: 1rem;
+  }
+
+  & .question-container{
+    display: grid;
+    gap: .5rem;
+    margin-inline: 2rem;
+    padding-inline: 2rem;
+  
+    & fieldset{
+      padding: 1rem .5rem;
+      display: grid;
+      gap: 1rem;
+      border-radius: .5rem;
+
+      & legend{
+        padding-inline: 1rem;
+      }
+    }
+  
+    & input[type="radio"],
+    & input[type="checkbox"]{
+      accent-color: var(--secondary);
+    }
+  
+    & input[type="text"],
+    & select{
+      padding: .7rem .5rem;
+      border-radius: .5rem;
+      border: 1px solid lightgray;
+      margin-inline: 1rem;
+    }
+  
+    & label{
+      font-weight: var(--fw-500);
+      margin-inline: 1rem;
+    }
+  }
+}
+
+.delete-quiz-form{
+  width: max-content;
+  padding: .8rem 1rem;
+  border-radius: .5rem;
+  background-color: var(--invalid);
+  transition: .3s ease-in-out;
+  margin: 0 auto;
+
+  &:hover{
+    opacity: .9;
+  }
+
+  & .delete-quiz{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: var(--text-md);
+    color: var(--white);
+    background: none; 
+    border: none; 
+    padding: 0; 
+    
+    & img{
+      width: var(--text-lg);
+    }
+  }
+}
+
+
+#submit-btn{
+  display: block;
+  padding: .8rem 1rem;
+  max-width: max-content;
+  margin: 2rem auto;
+  background-color: var(--black);
+  color: var(--white);
+  border-radius: .5rem;
+  border: none;
+  transition: .3s ease-in-out;
+  font-size: var(--text-md);
+
+  &:hover{
+    opacity: 0.9;
+  }
+}
+
+
+@media screen and (max-width: 768px){
+.quiz-container{
+  & .action-btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+
+    & #num-question{
+      width: 100%;
+    }
+
+    & button{
+      width: 100%;
+    }
+  }
+
+  
+  & .question-container{
+    gap: 1rem;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  & #submit-btn{
+    margin-top: 3rem!important;
+    max-width: 100%;
+  }
+}  
+}
