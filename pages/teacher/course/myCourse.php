@@ -1,4 +1,74 @@
- <?php include '../../../src/teacher/createCourse.php'; ?>
+ <?php 
+  include '../../../src/teacher/createCourse.php'; 
+
+  if(isset($_SESSION['delete-course-success'])){
+    echo "
+        <script>
+          window.onload = ()=>{
+            alert(`{$_SESSION['delete-course-success']}`);
+           }
+        </script>
+    ";
+    unset($_SESSION['delete-course-success']);
+  }
+
+  if(isset($_SESSION['delete-course-failed'])){
+    echo "
+        <script>
+          window.onload = ()=>{
+            alert(`{$_SESSION['delete-course-failed']}`);
+           }
+        </script>
+    ";
+    unset($_SESSION['delete-course-failed']);
+  }
+
+  if(isset($_SESSION['delete-course-error'])){
+    echo "
+        <script>
+          window.onload = ()=>{
+            alert(`{$_SESSION['delete-course-error']}`);
+           }
+        </script>
+    ";
+    unset($_SESSION['delete-course-error']);
+  }
+
+  // course recover message
+  if(isset($_SESSION['recover-course-success'])){
+    echo "
+        <script>
+          window.onload = ()=>{
+            alert(`{$_SESSION['recover-course-success']}`);
+           }
+        </script>
+    ";
+    unset($_SESSION['recover-course-success']);
+  }
+
+  if(isset($_SESSION['recover-course-failed'])){
+    echo "
+        <script>
+          window.onload = ()=>{
+            alert(`{$_SESSION['recover-course-failed']}`);
+           }
+        </script>
+    ";
+    unset($_SESSION['recover-course-failed']);
+  }
+
+  if(isset($_SESSION['recover-course-error'])){
+    echo "
+        <script>
+          window.onload = ()=>{
+            alert(`{$_SESSION['recover-course-error']}`);
+           }
+        </script>
+    ";
+    unset($_SESSION['recover-course-error']);
+  }
+  
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,25 +102,31 @@
   <section class="container-sm main-content">
     <article class="content-container">
       <div class="text">
-        <h2>My Courses</h2>
+        <h2>&#10070; My Courses</h2>
         <h3>Course overview</h3>
       </div>
       
       <div class="action-container">
-        <div class="search-bar">
-          <img src="../../../assets/images/icons/icon-search.svg" alt="icon-search" class="icon">
-          <input type="text" id="search-input" placeholder="Search courses..." />
-        </div>
+        <div class="mini-container">
+          <div class="search-bar">
+            <img src="../../../assets/images/icons/icon-search.svg" alt="icon-search" class="icon">
+            <input type="text" id="search-input" placeholder="Search courses..." />
+          </div>
       
-        <button id="add-course">
-          Add Course
-        </button>
+          <button id="add-course">
+            Add Course
+          </button>
+        </div>
+
+        <a href="deleteCourseList.php" class="view-delete">
+          Delete History &#x21dd;
+        </a>
       </div>
 
       <div class="container-grid">
         <?php
           $user_id =  $_SESSION['user-id'];
-          $sql = "select * from course_tb where teacher_id = '$user_id'";
+          $sql = "select * from course_tb where is_delete = 0 and teacher_id = '$user_id' order by updated_at asc";
           $container = mysqli_query($conn, $sql);
 
           if(mysqli_num_rows($container) > 0){

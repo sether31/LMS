@@ -22,50 +22,65 @@
   & .action-container{
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 3rem;
+    justify-content: space-between;
     margin-block: 1rem;
     
-    & .search-bar{
-      position: relative;
+    & .mini-container{
       display: flex;
-      width: 200px;
-  
-      & input{
-        display: block;
-        padding: 0 2.3rem;
-        height: 2.7rem;
-        border-radius: .5rem;
-        border: 1px solid var(--gray);
-        background-color: var(--primary);
+      align-items: center;
+      justify-content: flex-start;
+      gap: 3rem;
+ 
+      & .search-bar{
+        position: relative;
+        display: flex;
+        width: 200px;
+    
+        & input{
+          display: block;
+          padding: 0 2.3rem;
+          height: 2.7rem;
+          border-radius: .5rem;
+          border: 1px solid var(--gray);
+          background-color: var(--primary);
+        }
+    
+        & .icon{
+          height: 1.3rem;
+          position: absolute;
+          top: 50%;
+          left: .7rem;
+          transform: translateY(-50%);
+          z-index: 1;
+        }
       }
-  
-      & .icon{
-        height: 1.3rem;
-        position: absolute;
-        top: 50%;
-        left: .7rem;
-        transform: translateY(-50%);
-        z-index: 1;
-      }
-    }
-  
-    & #add-course{
-      width: max-content;
-      height: auto;
-      padding: .8rem .5rem;
-      border-radius: .5rem;
-      color: var(--secondary);
-      border: 1px solid var(--gray);
-      background-color: primary;
-      transition: .3s ease-in-out;
 
-      &:hover{
-        color: var(--white);
-        border-color: var(--secondary);
-        background-color: var(--secondary);  
+      & #add-course{
+        width: max-content;
+        height: auto;
+        padding: .8rem .5rem;
+        border-radius: .5rem;
+        color: var(--secondary);
+        border: 1px solid var(--gray);
+        background-color: primary;
+        transition: .3s ease-in-out;
+  
+        &:hover{
+          color: var(--white);
+          border-color: var(--secondary);
+          background-color: var(--secondary);  
+        }
       }
     }
+  
+    & .view-delete{
+      transition: .3s ease-in-out;
+      &:hover{
+        color: var(--secondary);
+        text-decoration: underline 1px wavy var(--secondary);
+      }
+    }
+    
   }
 
   & .container-grid{
@@ -330,49 +345,60 @@
 @media screen and (max-width: 468px){
   .content-container .action-container{
     flex-direction:column;
-    align-items: unset;
+    align-items: center;
     justify-content: unset;
     gap: 1rem;
     
-    & .search-bar{
-      position: relative;
-      display: flex;
-      width: 100%;
-  
-      & input{
-        display: block;
-        padding: 0 2.3rem;
-        height: 2.7rem;
+    & .mini-container{
+      flex-direction:column;
+      align-items: unset;
+      justify-content: center;
+      gap: 1rem;
+
+      & .search-bar{
+        position: relative;
+        display: flex;
+        width: 100%;
+    
+        & input{
+          display: block;
+          padding: 0 2.3rem;
+          height: 2.7rem;
+          border-radius: .5rem;
+          border: 1px solid var(--gray);
+          background-color: var(--primary);
+          width:100%;
+        }
+    
+        & .icon{
+          height: 1.3rem;
+          position: absolute;
+          top: 50%;
+          left: .7rem;
+          transform: translateY(-50%);
+          z-index: 1;
+        }
+      }
+    
+      & #add-course{
+        width: 100%;
+        height: auto;
+        padding: .8rem .5rem;
         border-radius: .5rem;
+        color: var(--secondary);
         border: 1px solid var(--gray);
-        background-color: var(--primary);
-        width:100%;
+        background-color: primary;
+        transition: .3s ease-in-out;
+    
+        &:hover{
+          color: var(--white);
+          border-color: var(--secondary);
+          background-color: var(--secondary);  
+        }
       }
-  
-      & .icon{
-        height: 1.3rem;
-        position: absolute;
-        top: 50%;
-        left: .7rem;
-        transform: translateY(-50%);
-        z-index: 1;
-      }
-    }
-  
-    & #add-course{
-      width: 100%;
-      height: auto;
-      padding: .8rem .5rem;
-      border-radius: .5rem;
-      color: var(--secondary);
-      border: 1px solid var(--gray);
-      background-color: primary;
-      transition: .3s ease-in-out;
-  
-      &:hover{
-        color: var(--white);
-        border-color: var(--secondary);
-        background-color: var(--secondary);  
+
+      & .view-delete{
+        text-align: center;
       }
     }
   }

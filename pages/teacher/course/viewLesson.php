@@ -154,7 +154,76 @@
     ";
     unset($_SESSION['lesson-delete-error']);
   }
-   
+
+  // create quiz message
+  if(isset($_SESSION['quiz-create-success'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['quiz-create-success']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['quiz-create-success']);
+  }
+
+  if(isset($_SESSION['quiz-create-error'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['quiz-create-error']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['quiz-create-error']);
+  }
+
+  // update quiz
+   if(isset($_SESSION['quiz-update-success'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['quiz-update-success']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['quiz-update-success']);
+  }
+
+  if(isset($_SESSION['quiz-update-failed'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['quiz-update-failed']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['quiz-update-failed']);
+  }
+
+  // delete quiz
+  if(isset($_SESSION['quiz-delete-success'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['quiz-delete-success']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['quiz-delete-success']);
+  }
+
+  if(isset($_SESSION['quiz-delete-failed'])){
+    echo "
+      <script>
+        window.onload = ()=>{
+          alert(`{$_SESSION['quiz-delete-failed']}`);
+        }
+      </script>
+    ";
+    unset($_SESSION['quiz-delete-failed']);
+  }
+
 
 ?>
 
@@ -199,9 +268,30 @@
 
       <div class="flex">
         <h3>&#10070; LESSONS SECTION</h3>
-        <a href="./createLesson.php?courseId=<?php echo $get_course_id;?>&moduleId=<?php echo $get_module_id;?>" class="create-lesson-btn">
-          Create lesson
-        </a>
+        <span>
+          <a href="./createLesson.php?courseId=<?php echo $get_course_id;?>&moduleId=<?php echo $get_module_id;?>" class="create-lesson-btn">
+            Create lesson
+          </a>
+          <!-- Modify the button based on quiz existence -->
+          <?php 
+              // Check if a quiz exists for the module
+              $sql = "SELECT * FROM quiz_tb WHERE module_id = '$get_module_id'";
+              $container = mysqli_query($conn, $sql);
+              //$container = ; // Set $container to true if quiz exists
+              
+              if(mysqli_num_rows($container) > 0): 
+                $container = mysqli_fetch_array($container);
+                $_SESSION['quiz-id'] = $container['quiz_id'];
+          ?>
+            <a href="./updateQuiz.php?courseId=<?php echo $get_course_id;?>&moduleId=<?php echo $get_module_id;?>" class="create-quiz-btn">
+              Edit Quiz
+            </a>
+          <?php else: ?>
+            <a href="./createQuiz.php?courseId=<?php echo $get_course_id;?>&moduleId=<?php echo $get_module_id;?>" class="create-quiz-btn">
+              Create Quiz
+            </a>
+          <?php endif; ?>
+        </span>
       </div>
 
       <hr class="hr">
