@@ -13,8 +13,7 @@ export default defineConfig([
     rules:{
       "camelcase": ["error", {"properties": "never"}],
       "eqeqeq": ["error", "always"],
-      "no-unused-vars": "error",
-       "no-empty": "error"
+      "no-empty": "error"
     }
   }
 ]);
