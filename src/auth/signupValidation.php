@@ -8,29 +8,31 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $signup_name = $_POST['signup-name'];
   $signup_email = $_POST['signup-email'];
   $signup_password = password_hash($_POST['signup-password'], PASSWORD_DEFAULT);
-  $signup_role = $_POST['signup-role'];
-  $signup_birthday = $_POST['signup-birthday'];
 
-  $current_date = new DateTime(); 
-  $birthday_date = new DateTime($signup_birthday); 
-
-  if($birthday_date > $current_date){
-    $_SESSION['bday-error'] = "Enter a valid birthdate";
-    $isError = true;
-  }
-
-  $check_image = null;
+  $check_image = NULL;
+  
   if(isset($_FILES['signup-picture']) && $_FILES['signup-picture']['error'] === UPLOAD_ERR_OK){
+    $maxFileSize = 15 * 1024 * 1024;
 
-    $maxFileSize = 10 * 1024 * 1024;
     if($_FILES['signup-picture']['size'] > $maxFileSize){
-      $_SESSION['picture-error'] = "Image is too large. Maximum size is 10MB.";
+      $_SESSION['picture-error'] = "Image is too large. (max: 15mb)";
       $isError = true;
-    }
+    } else{
+      $isError = false;
+      $image_tmp_path = $_FILES['signup-picture']['tmp_name'];
+      $image_name = $_FILES['signup-picture']['name'];
+      $directory = '../../'; 
+      $check_image = 'data/teacher/profile' . $image_name;
+      $directory .= $check_image;
 
-    $image_tmp_path = $_FILES['signup-picture']['tmp_name'];
-    $check_image = file_get_contents($image_tmp_path); 
-    $check_image = mysqli_real_escape_string($conn, $check_image); 
+      if(move_uploaded_file($image_tmp_path, $directory)){
+        
+      } else{
+        $_SESSION['picture-error'] = "Failed to upload the image. Please try again.";
+      }
+    }
+  } else{
+    echo "error image. please try again.";
   }
 
   $sql = "select count(*) as count from user_tb where email = '$signup_email'";
@@ -49,20 +51,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   }
 
   if($check_image === null){
-    $sql = "insert into user_tb (name, email, password, role, date_of_birth, picture) values (
+    $sql = "insert into user_tb (name, email, password, picture) values (
       '$signup_name', 
       '$signup_email', 
       '$signup_password', 
-      '$signup_role', 
-      '$signup_birthday', 
       NULL)";
   } else {
-    $sql = "insert into user_tb (name, email, password, role, date_of_birth, picture) values (
+    $sql = "insert into user_tb (name, email, password, picture) values (
       '$signup_name', 
       '$signup_email', 
       '$signup_password', 
-      '$signup_role', 
-      '$signup_birthday', 
       '$check_image')";
   }
 

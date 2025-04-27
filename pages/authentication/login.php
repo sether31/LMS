@@ -21,14 +21,6 @@
         </div>
 
         <form action="" method="post" class="login-form">
-          <div class="select-role">
-            <label for="login-role">Select role:</label>
-            <select name="login-role" id="login-role" required>
-              <option value="student" selected>Student</option>
-              <option value="teacher">Teacher</option>
-            </select>
-          </div>
-
           <div class="input-box">
             <img src="../../assets/images/icons/icon-email.svg" alt="icon-email" class="icon">
             <input type="email" name="login-email" id="login-email" placeholder=" " required>
@@ -79,7 +71,7 @@
         </form>
       </div>
       <div class="login-right-section">
-        <img src="../../assets/images/ka-poster.jpg" alt="ka-poster">
+        <img src="../../assets/images/ka-poster.jpeg" alt="ka-poster">
       </div> 
     </article>
   </section>

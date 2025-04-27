@@ -12,7 +12,7 @@
   <section class="signup-container">
     <article class="flex-container container-md">
       <div class="signup-left-section">
-        <img src="../../assets/images/ka-poster.jpg" alt="ka-poster">
+        <img src="../../assets/images/ka-poster.jpeg" alt="ka-poster">
       </div>
       <div class="signup-right-section">
         <div class="text">
@@ -38,40 +38,14 @@
               <input type="file" name="signup-picture" id="signup-picture" accept="image/*" >
             </div>
 
-            <div class="select-role">
-              <label for="signup-role">
-              <span class="required">*</span> Select role:
-              </label>
-              <select name="signup-role" id="signup-role" required>
-                <option value="student" selected>Student</option>
-                <option value="teacher">Teacher</option>
-              </select>
-            </div>
-
             <div class="name">
               <label for="signup-name" class="signup-name-label">
               <span class="required">*</span > Name:
               </label>
               <div class="input-box">
                 <img src="../../assets/images/icons/icon-name.svg" alt="icon-name" class="icon">
-                <input type="text" name="signup-name" id="signup-name" minlength="10" placeholder="Enter your full name" required>
+                <input type="text" name="signup-name" id="signup-name" minlength="5" placeholder="Enter your full name" required>
               </div>
-            </div>
-
-            <div class="bday">
-              <label for="signup-bday">
-              <span class="required">*</span > Birthday: 
-              
-              </label>
-              <small class="error-msg">
-                <?php 
-                    if(isset($_SESSION['bday-error'])){
-                    echo "({$_SESSION['bday-error']})";
-                    unset($_SESSION['bday-error']);
-                  }
-                ?>
-              </small>
-              <input type="date" name="signup-birthday" id="signup-bday" required>
             </div>
           </div>
 

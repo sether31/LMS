@@ -109,35 +109,7 @@ label span.required{
   color: red;
 }
 
-/* bday & select input */
 
-.bday input[type="date"],
-.select-role select{
-  width: 100%;
-  padding: 0 1.5rem 0 1rem;
-  height: 2.8rem;
-  border-radius: var(--border-rad);
-  border: 2px solid var(--gray);
-}
-
-.select-role select option{
-  padding: .5rem;
-  background-color: var(--white);
-  cursor: pointer;
-}
-
-.bday input[type="date"]::-webkit-calendar-picker-indicator{
-  background-color: var(--white);
-  border-radius: var(--border-rad);
-  padding: .5rem;
-}
-
-.bday input[type="date"]::-webkit-calendar-picker-indicator:hover{
-  background-color: var(--tertiary);
-  cursor: pointer;
-}
-
-/* validation */
 
 input:valid,
 input:focus:valid,
@@ -157,7 +129,7 @@ input:not(:placeholder-shown):invalid{
 /* mini layout*/
 .mini-form-container{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -204,11 +176,7 @@ input:not(:placeholder-shown):invalid{
     font-size: var(--text-2xl);
   }
 
-  .mini-form-container{
-    grid-template-columns: 1fr;
-  }
-
-  flex-container{
+  .flex-container{
     padding: 1rem;
   }
 }
