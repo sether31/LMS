@@ -1,10 +1,62 @@
 <?php
-include '../../db/connect.php';
-session_start();
+  include '../../db/connect.php';
+  session_start();
 
-if(!isset($_SESSION['user-id'])){
-  die("Access denied. Please log in.");
-}
+  if(!isset($_SESSION['user-id'])){
+    die("Access denied. Please log in.");
+  }
+
+  // profile update message
+  if(isset($_SESSION['profile-update-success'])){
+    echo "
+        <script>
+          window.onload = ()=>{
+            alert(`{$_SESSION['profile-update-success']}`);
+            }
+        </script>
+    ";
+    unset($_SESSION['profile-update-success']);
+  }
+
+  if(isset($_SESSION['profile-update-failed'])){
+    echo "
+        <script>
+          window.onload = ()=>{
+            alert(`{$_SESSION['profile-update-failed']}`);
+            }
+        </script>
+    ";
+    unset($_SESSION['profile-update-failed']);
+  }
+
+  if(isset($_SESSION['profile-update-image-failed'])){
+    echo "
+        <script>
+          window.onload = ()=>{
+            alert(`{$_SESSION['profile-update-image-failed']}`);
+            }
+        </script>
+    ";
+    unset($_SESSION['profile-update-image-failed']);
+  }
+
+  $user_id = $_SESSION['user-id'];
+  $profile_picture = null;
+  $profile_name = null;
+  $profile_email= null;
+  $profile_role = null;
+
+  $sql = "select * from user_tb where user_Id='$user_id'";
+  $container = mysqli_query($conn, $sql);
+
+  if(mysqli_num_rows($container) > 0){
+    $container = mysqli_fetch_array($container);
+    $profile_picture = $container['picture'] ?? 'assets/images/no-picture.jpg';
+    $profile_name = $container['name'];
+    $profile_email= $container['email'];
+    $profile_role = $container['role'];
+    $profile_created = date("F j, Y", strtotime($container['created_at']));
+  }
 
 ?>
 
@@ -15,7 +67,7 @@ if(!isset($_SESSION['user-id'])){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kitchenomachia Academy</title>
-  <link rel="stylesheet" href="../../assets/styles/teacher/dashboard.css">
+  <link rel="stylesheet" href="../../assets/styles/teacher/profile.css">
 </head>
 <body>
   <header class="navbar">
@@ -40,9 +92,65 @@ if(!isset($_SESSION['user-id'])){
   </header>
 
 
+  <section class="container-sm">
+    <div class="wrapper">
+      <article class="header">
+        <h2>My Profile</h2>
+        <img src="../../<?php echo $profile_picture; ?>" alt="profile-picture" class="profile-picture">
+        <p>
+          Manage your personal information and update your profile here.
+        </p>
+      </article>
 
+      <article class="profile-info">
+        <div class="info">
+          <h3>Name:</h3>
+          <p>
+            <?php echo $profile_name; ?>
+          </p>
+        </div>
+        <div class="info">
+          <h3>Email:</h3>
+          <p>
+            <?php echo $profile_email; ?>
+          </p>
+        </div>
+        <div class="info">
+          <h3>Role:</h3>
+          <p>
+            <?php echo $profile_role; ?>
+          </p>
+        </div>
+        <div class="info">
+          <h3>Joined at:</h3>
+          <p>
+            <?php echo $profile_created; ?>
+          </p>
+        </div>
+      </article>
+
+      <article class="edit-profile-form">
+        <h3>Edit Profile</h3>
+        <form action="../../src/teacher/updateProfile.php" method="post" enctype="multipart/form-data">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" value="<?php echo $profile_name; ?>" required>
+
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" value="<?php echo $profile_email; ?>" required>
+
+          <label for="picture">Upload Profile Picture</label>
+          <input type="file" id="picture" name="picture" accept="image/*">
+
+          <button type="submit" class="btn-primary">
+            Update Profile
+          </button>
+        </form>
+      </article>
+
+  </section>
 
 
   <script src="../../scripts/utils/navbar.js"></script>
+
 </body>
 </html>
