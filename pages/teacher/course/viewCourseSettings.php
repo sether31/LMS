@@ -401,7 +401,7 @@
                   <br><br>
                 
                   <div class="flex">
-                    <form action="../../../src/teacher/moduleStatus.php" method="POST" onsubmit="return confirm('Are you sure you want to publish this course?');" class="module-status-form">
+                    <form action="../../../src/teacher/moduleStatus.php" method="post" onsubmit="return confirm('Are you sure you want to publish this course?');" class="module-status-form">
                       <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
                       <input type="hidden" name="module-status" value="<?php echo $module_status ?>">
 
