@@ -150,7 +150,7 @@ $get_course_id = $_GET['courseId'];
         <!-- display module --> 
         <div class="module-container">
           <?php
-            $sql = "select * from module_tb where course_id = '$get_course_id'";
+            $sql = "select * from module_tb where course_id = '$get_course_id' and is_delete = 0";
             $container = mysqli_query($conn, $sql);
             if(mysqli_num_rows($container) > 0):
               while($row = mysqli_fetch_array($container)):
@@ -181,7 +181,7 @@ $get_course_id = $_GET['courseId'];
 
                   <!-- display lesson -->
                   <?php
-                    $sql2 = "select * from lesson_tb where module_id = '$module_id'";
+                    $sql2 = "select * from lesson_tb where module_id = '$module_id' and is_delete = 0";
                     $container2 = mysqli_query($conn, $sql2);
                     if(mysqli_num_rows($container2) > 0):
                       while($row2 = mysqli_fetch_array($container2)):

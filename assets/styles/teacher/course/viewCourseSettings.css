@@ -224,9 +224,18 @@
 
 
 /* modules */
-.module-head{
+.module-section-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-block: 2rem;
   padding-inline: 2rem;
+  transition: .3s ease-in-out;
+
+  & a:hover{
+    color: var(--secondary);
+    text-decoration: wavy 1px solid var(--secondary);
+  }
 }
 
 .hr{
