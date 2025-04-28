@@ -13,8 +13,10 @@
 1. **Create course**
 2. **Create modules under course**
 3. **Create lessons under modules**
-4. **Create Quiz every module before allowing user to go to next module**
-5. **Generate certificate**
+4. **Publish and unpublish courses**
+5. **Recover deleted courses**
+6. **Create quiz every module before allowing user to go to next module**
+7. **Generate certificate**
 
 ## Installation
 
@@ -36,9 +38,10 @@ npm install
 
 ## Technologies Used
 #### Frontend
-  + HTML & CSS:
-  + JavaScript (ES6+).
+  + HTML & CSS
   + ESLint
+  + JavaScript (ES6+)
+  + Chart.js (JS Library)
   + Node package manager (NPM)
 
 #### Backend:
