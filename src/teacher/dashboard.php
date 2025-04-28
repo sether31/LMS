@@ -11,17 +11,17 @@ $container = mysqli_query($conn, $sql);
 $container = mysqli_fetch_array($container);
 $total_students = $container['total_students'];
 
-$sql2 = "select count(*) as total_courses from course_tb";
+$sql2 = "select count(*) as total_courses from course_tb where is_delete = 0";
 $container2 = mysqli_query($conn, $sql2);
 $container2 = mysqli_fetch_array($container2);
 $total_courses = $container2['total_courses'];
 
-$sql3 = "select count(*) as total_modules from module_tb";
+$sql3 = "select count(*) as total_modules from module_tb where is_delete = 0";
 $container3 = mysqli_query($conn, $sql3);
 $container3 = mysqli_fetch_array($container3);
 $total_modules = $container3['total_modules'];
 
-$sql4 = "select count(*) as total_lessons from lesson_tb";
+$sql4 = "select count(*) as total_lessons from lesson_tb where is_delete = 0";
 $container = mysqli_query($conn, $sql4);
 $container = mysqli_fetch_array($container);
 $total_lessons = $container['total_lessons'];
@@ -58,7 +58,6 @@ while ($row = mysqli_fetch_array($result_courses_modules)) {
     ];
 }
 
-// Pass the data to JavaScript
 echo "<script> 
         const coursesData = " . json_encode($courses_data) . ";
       </script>";

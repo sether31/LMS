@@ -1,26 +1,38 @@
 <?php 
   include '../../../src/teacher/createCourse.php'; 
 
-  if(isset($_SESSION['delete-course-success'])){
+  // course recover message
+  if(isset($_SESSION['recover-course-success'])){
     echo "
         <script>
           window.onload = ()=>{
-            alert(`{$_SESSION['delete-course-success']}`);
-           }
+            alert(`{$_SESSION['recover-course-success']}`);
+            }
         </script>
     ";
-    unset($_SESSION['delete-course-success']);
+    unset($_SESSION['recover-course-success']);
   }
 
-  if(isset($_SESSION['delete-course-failed'])){
+  if(isset($_SESSION['recover-course-failed'])){
     echo "
         <script>
           window.onload = ()=>{
-            alert(`{$_SESSION['delete-course-failed']}`);
-           }
+            alert(`{$_SESSION['recover-course-failed']}`);
+            }
         </script>
     ";
-    unset($_SESSION['delete-course-failed']);
+    unset($_SESSION['recover-course-failed']);
+  }
+
+  if(isset($_SESSION['recover-course-error'])){
+    echo "
+        <script>
+          window.onload = ()=>{
+            alert(`{$_SESSION['recover-course-error']}`);
+            }
+        </script>
+    ";
+    unset($_SESSION['recover-course-error']);
   }
   
 ?>

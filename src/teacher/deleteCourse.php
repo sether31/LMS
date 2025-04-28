@@ -12,6 +12,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['course-id'])){
   $container = mysqli_query($conn, $sql);
 
   if($container){
+      $sql2 = "update module_tb SET is_delete = 1 where course_id = '$course_id'";
+      mysqli_query($conn, $sql2);
+
+      $sql3 = "SELECT module_id from module_tb where course_id = '$course_id'";
+      $container2 = mysqli_query($conn, $sql3);
+
+      while($module = mysqli_fetch_array($container2)){
+          $module_id = $module['module_id'];
+          $sql4 = "update lesson_tb SET is_delete = 1 where module_id = '$module_id'";
+          mysqli_query($conn, $sql4);
+      }
+
       $_SESSION['delete-course-success'] = "Course deleted successfully.";
   } else{
       $_SESSION['delete-course-failed'] = "Course delete failed: " . mysqli_error($conn);

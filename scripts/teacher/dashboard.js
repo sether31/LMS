@@ -43,6 +43,11 @@ const quizFailPassModule = new Chart(document.getElementById('quiz-fail-pass-mod
         label: 'Fail Rate (%)',
         data: [15, 30, 40, 10],
         backgroundColor: 'rgba(106, 14, 39, 1)'
+      },
+      {
+        label: 'Total attempts',
+        data: [25, 50, 40, 20],
+        backgroundColor: 'rgba(106, 14, 39, 1)'
       }
     ]
   },

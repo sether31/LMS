@@ -34,39 +34,6 @@
     unset($_SESSION['delete-course-error']);
   }
 
-  // course recover message
-  if(isset($_SESSION['recover-course-success'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-course-success']}`);
-           }
-        </script>
-    ";
-    unset($_SESSION['recover-course-success']);
-  }
-
-  if(isset($_SESSION['recover-course-failed'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-course-failed']}`);
-           }
-        </script>
-    ";
-    unset($_SESSION['recover-course-failed']);
-  }
-
-  if(isset($_SESSION['recover-course-error'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-course-error']}`);
-           }
-        </script>
-    ";
-    unset($_SESSION['recover-course-error']);
-  }
   
  ?>
 <!DOCTYPE html>
