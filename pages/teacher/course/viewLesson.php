@@ -259,6 +259,8 @@
         <p class="description">
           &rarrlp; <?php echo ucfirst($container['description']) ?>
         </p>
+
+        <a href="./deleteLessonList.php?courseId=<?php echo $get_course_id ?>&moduleId=<?php echo $get_module_id ?>">Delete lesson history</a>
       </div>
 
       <?php endif; ?>
@@ -272,12 +274,9 @@
           <a href="./createLesson.php?courseId=<?php echo $get_course_id;?>&moduleId=<?php echo $get_module_id;?>" class="create-lesson-btn">
             Create lesson
           </a>
-          <!-- Modify the button based on quiz existence -->
           <?php 
-              // Check if a quiz exists for the module
               $sql = "SELECT * FROM quiz_tb WHERE module_id = '$get_module_id'";
               $container = mysqli_query($conn, $sql);
-              //$container = ; // Set $container to true if quiz exists
               
               if(mysqli_num_rows($container) > 0): 
                 $container = mysqli_fetch_array($container);
@@ -297,7 +296,7 @@
       <hr class="hr">
 
       <?php
-        $sql = "select * from lesson_tb where module_id = '$get_module_id'";
+        $sql = "select * from lesson_tb where module_id = '$get_module_id' and is_delete = 0";
         $container = mysqli_query($conn, $sql);
 
         if(mysqli_num_rows($container) > 0):

@@ -1,39 +1,43 @@
 <?php 
-  include '../../../src/teacher/createCourse.php'; 
+  include '../../../db/connect.php';
+  session_start();
 
-  // course recover message
-  if(isset($_SESSION['recover-course-success'])){
+  // module recover message
+  if(isset($_SESSION['recover-module-success'])){
     echo "
         <script>
           window.onload = ()=>{
-            alert(`{$_SESSION['recover-course-success']}`);
+            alert(`{$_SESSION['recover-module-success']}`);
             }
         </script>
     ";
-    unset($_SESSION['recover-course-success']);
+    unset($_SESSION['recover-module-success']);
   }
 
-  if(isset($_SESSION['recover-course-failed'])){
+  if(isset($_SESSION['recover-module-failed'])){
     echo "
         <script>
           window.onload = ()=>{
-            alert(`{$_SESSION['recover-course-failed']}`);
+            alert(`{$_SESSION['recover-module-failed']}`);
             }
         </script>
     ";
-    unset($_SESSION['recover-course-failed']);
+    unset($_SESSION['recover-module-failed']);
   }
 
-  if(isset($_SESSION['recover-course-error'])){
+  if(isset($_SESSION['recover-module-error'])){
     echo "
         <script>
           window.onload = ()=>{
-            alert(`{$_SESSION['recover-course-error']}`);
+            alert(`{$_SESSION['recover-module-error']}`);
             }
         </script>
     ";
-    unset($_SESSION['recover-course-error']);
+    unset($_SESSION['recover-module-error']);
   }
+
+  $user_id = $_SESSION['user-id'];
+  $get_course_id = $_GET['courseId'];
   
 ?>
 
@@ -70,7 +74,7 @@
   <section class="container-sm main-content">
     <article class="content-container">
       <div class="text">
-        <h2>&#10070; Deleted Course</h2>
+        <h2>&#10070; Deleted Modules</h2>
       </div>
       
       <div class="action-container">
@@ -80,43 +84,33 @@
             <input type="text" id="search-input" placeholder="Search courses..." />
           </div>
         </div>
-        <a href="./myCourse.php" class="back">Go back &#x21dd;</a>
+        <a href="./viewCourseSettings.php?courseId=<?php echo $get_course_id; ?>" class="back">Go back &#x21dd;</a>
       </div>
 
 
       <div class="container-grid">
         <?php
-          $user_id =  $_SESSION['user-id'];
-          $sql = "select * from course_tb where is_delete = 1 and teacher_id = '$user_id' order by updated_at asc";
+          $sql = "select * from module_tb where is_delete = 2 and course_id = '$get_course_id' order by updated_at desc";
           $container = mysqli_query($conn, $sql);
 
           if(mysqli_num_rows($container) > 0){
             while($row = mysqli_fetch_array($container)){
-              $course_id = $row['course_id'];
-              $course_title = ucwords($row['title']);
-              $course_picture = $row['course_image']; 
-              $course_status = strtoupper($row['status']);
+              $module_id = $row['module_id'];
+              $module_title = ucwords($row['title']);
               $title_length = 50;
-              $description_length = 20;
-
-              if(strlen($course_title) > $title_length){
-                $course_title = substr($course_title, 0, $title_length) . "...";
+              if(strlen($module_title) > $title_length){
+                $module_title = substr($module_title, 0, $title_length) . "...";
               }
 
               echo "
                 <article class='card'>
-                  <p class='publish'>{$course_status}</p>
-                  <div class='card-image'>
-                    <a>
-                      <img src='../../../{$course_picture}' alt='course_picture'>
-                    </a>
-                  </div>
                   <div class='card-content'>
                       <p class='card-title'>
-                        {$course_title}
+                        {$module_title}
                       </p>
-                      <form action='../../../src/teacher/recoverDeleteCourse.php' method='post'>
-                        <input type='hidden' name='course-id' value='{$course_id}'>
+                      <form action='../../../src/teacher/recoverDeleteModule.php' method='post'>
+                        <input type='hidden' name='course-id' value='{$get_course_id}'>
+                        <input type='hidden' name='module-id' value='{$module_id}'>
                         <button type='submit'>
                           Recover
                         </button>
@@ -126,7 +120,7 @@
               ";
             }
           } else{
-              echo "<h2 class='no-course'>No delete of courses found.</h2>";
+              echo "<h2 class='no-course'>No delete of modules found.</h2>";
           }
         ?>
       </div>

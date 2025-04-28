@@ -13,7 +13,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $module_id = $_POST['module-id'];
   $course_id = $_POST['course-id'];
   $lesson_id = $_POST['lesson-id'];
-  $sql = "delete from lesson_tb where lesson_id = '$lesson_id'";
+  
+  $sql = "update lesson_tb set is_delete = 3 where lesson_id = '$lesson_id' and is_delete = 0";
   $container = mysqli_query($conn, $sql);
 
   if($container){
@@ -31,3 +32,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 }
 
 ?>
+
+
+
+

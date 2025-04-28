@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $check_video = null;
 
     if($_FILES['lesson-image']['error'] === UPLOAD_ERR_OK){
-      $maxFileSize = 10 * 1024 * 1024;
+      $maxFileSize = 15 * 1024 * 1024;
 
       if($_FILES['lesson-image']['size'] <= $maxFileSize){
         $image_tmp_path = $_FILES['lesson-image']['tmp_name'];
@@ -40,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
           exit();
         }
       } else{
-        $_SESSION['lesson-create-image-failed'] = "Image is too large (max 10MB).";
+        $_SESSION['lesson-create-image-failed'] = "Image is too large (max 15MB).";
         header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
         exit();
       }

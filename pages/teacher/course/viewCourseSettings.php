@@ -349,11 +349,14 @@
             </div>
           </div>
 
-          <h3 class="module-head">&#10070; MODULES SECTION</h3>
+          <div class="module-section-header">
+            <h3 class="module-head">&#10070; MODULES SECTION</h3>
+            <a href="./deleteModuleList.php?courseId=<?php echo $get_course_id; ?>">Delete Module History &#x21dd;</a>
+          </div>
           <hr class="hr">
 
           <?php
-            $sql = "select * from module_tb where course_id = '$get_course_id'";
+            $sql = "select * from module_tb where course_id = '$get_course_id' and is_delete = 0";
             $container = mysqli_query($conn, $sql);
             
             
