@@ -46,7 +46,7 @@
   $profile_email= null;
   $profile_role = null;
 
-  $sql = "select * from user_tb where user_Id='$user_id'";
+  $sql = "select * from user_tb where user_id='$user_id'";
   $container = mysqli_query($conn, $sql);
 
   if(mysqli_num_rows($container) > 0){
@@ -67,7 +67,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kitchenomachia Academy</title>
-  <link rel="stylesheet" href="../../assets/styles/teacher/profile.css">
+  <link rel="stylesheet" href="../../assets/styles/student/profile.css">
 </head>
 <body>
   <header class="navbar">
@@ -128,7 +128,7 @@
 
       <article class="edit-profile-form">
         <h3>Edit Profile</h3>
-        <form action="../../src/teacher/updateProfile.php" method="post" enctype="multipart/form-data">
+        <form action="../../src/student/updateProfile.php" method="post" enctype="multipart/form-data">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" placeholder="Enter your full name" value="<?php echo $profile_name; ?>" required>
 

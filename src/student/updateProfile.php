@@ -27,7 +27,7 @@
         $image_tmp_path = $_FILES['picture']['tmp_name'];
         $image_name = $_FILES['picture']['name'];
         $directory = '../../';
-        $check_image = 'data/teacher/profile/' . $image_name;
+        $check_image = 'data/student/profile/' . $image_name;
         $directory .= $check_image;
 
         if(move_uploaded_file($image_tmp_path, $directory)){
