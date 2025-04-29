@@ -161,8 +161,20 @@
         & .enrollment-form{
           margin-top: 1.2rem;
 
-          & .btn-primary{
-            height: 2.4rem;
+          & .btn-primary,
+          & .btn-disabled{
+            display: block;
+            height: auto;
+            width: 80%;
+            margin-inline: auto;
+            padding: .8rem 1rem;
+            border-radius: .5rem;
+          }
+
+          & .btn-disabled{
+            font-size: var(--text-md);
+            background-color: lightgray;
+            border: none;
           }
         }
       }
