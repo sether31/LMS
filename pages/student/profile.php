@@ -7,38 +7,25 @@
   }
 
   // profile update message
-  if(isset($_SESSION['profile-update-success'])){
-    echo "
+  $session_messages = [
+    'profile-update-success',
+    'profile-update-failed',
+    'profile-update-image-failed'
+  ];
+
+  foreach($session_messages as $key){
+    if(isset($_SESSION[$key])) {
+      echo "
         <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['profile-update-success']}`);
-            }
+          window.onload = () => {
+            alert(`{$_SESSION[$key]}`);
+          }
         </script>
-    ";
-    unset($_SESSION['profile-update-success']);
+      ";
+      unset($_SESSION[$key]);
+    }
   }
 
-  if(isset($_SESSION['profile-update-failed'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['profile-update-failed']}`);
-            }
-        </script>
-    ";
-    unset($_SESSION['profile-update-failed']);
-  }
-
-  if(isset($_SESSION['profile-update-image-failed'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['profile-update-image-failed']}`);
-            }
-        </script>
-    ";
-    unset($_SESSION['profile-update-image-failed']);
-  }
 
   $user_id = $_SESSION['user-id'];
   $profile_picture = null;

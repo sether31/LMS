@@ -4,155 +4,39 @@
   
   $get_course_id = $_GET['courseId'];
   
-  // error messages
+
   if(!isset($_SESSION['user-id'])){
     die("Access denied. Please log in.");
   }
   
-  // course message
-  if(isset($_SESSION['course-update-success'])){
-    echo "
+  // error messages
+  $session_messages = [
+    'course-update-success',
+    'course-update-failed',
+    'course-picture-error',
+    'module-create-success',
+    'module-create-failed',
+    'module-update-success',
+    'module-update-failed',
+    'module-delete-success',
+    'module-delete-failed',
+    'course-change-status-success',
+    'course-change-status-failed',
+    'module-change-status-success',
+    'module-change-status-failed'
+  ];
+
+  foreach($session_messages as $key){
+    if(isset($_SESSION[$key])) {
+      echo "
         <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['course-update-success']}`);
-           }
+          window.onload = () => {
+            alert(`{$_SESSION[$key]}`);
+          }
         </script>
-    ";
-    unset($_SESSION['course-update-success']);
-  }
-  
-  if(isset($_SESSION['course-update-failed'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['course-update-failed']}`);
-           }
-        </script>
-    ";
-    unset($_SESSION['course-update-failed']);
-  }
-  
-  if(isset($_SESSION['course-picture-error'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['course-picture-error']}`);
-        }
-      </script>
-    ";
-  }
-  
-  // module message
-  if(isset($_SESSION['module-create-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['module-create-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['module-create-success']);
-  }
-  
-  if(isset($_SESSION['module-create-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['module-create-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['module-create-failed']);
-  }
-
-  if(isset($_SESSION['module-update-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['module-update-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['module-update-success']);
-  }
-  
-  if(isset($_SESSION['module-update-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['module-update-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['module-update-failed']);
-  }
-
-  if(isset($_SESSION['module-delete-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['module-delete-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['module-delete-success']);
-  }
-  
-  if(isset($_SESSION['module-delete-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['module-delete-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['module-delete-failed']);
-  }
-
-  // publish message
-  if(isset($_SESSION['course-change-status-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['course-change-status-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['course-change-status-success']);
-  }
-
-  if(isset($_SESSION['course-change-status-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['course-change-status-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['course-change-status-failed']);
-  }
-
-  // active module
-  if(isset($_SESSION['module-change-status-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['module-change-status-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['module-change-status-success']);
-  }
-
-  if(isset($_SESSION['module-change-status-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['module-change-status-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['module-change-status-failed']);
+      ";
+      unset($_SESSION[$key]);
+    }
   }
 ?>
 
@@ -351,7 +235,7 @@
 
           <div class="module-section-header">
             <h3 class="module-head">&#10070; MODULES SECTION</h3>
-            <a href="./deleteModuleList.php?courseId=<?php echo $get_course_id; ?>">Delete Module History &#x21dd;</a>
+            <a href="./deleteModuleList.php?courseId=<?php echo $get_course_id; ?>">Delete History &#x21dd;</a>
           </div>
           <hr class="hr">
 
@@ -399,15 +283,18 @@
                   </div>
 
                   <br><br>
+
+                  <?php $new_module_status = ($module_status === 'active') ? 'Inactive Module' : 'Active Module'; ?>
                 
                   <div class="flex">
-                    <form action="../../../src/teacher/moduleStatus.php" method="post" onsubmit="return confirm('Are you sure you want to publish this course?');" class="module-status-form">
+                    <form action="../../../src/teacher/moduleStatus.php" method="post" onsubmit="return confirm('Are you sure you want to <?php echo $new_module_status; ?> <?php echo $module_title ?>?');" class="module-status-form">
                       <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
+                      <input type="hidden" name="module-id" value="<?php echo $module_id ?>">
                       <input type="hidden" name="module-status" value="<?php echo $module_status ?>">
 
                       <button type="submit" class="status-module">
                         <img src="../../../assets/images/icons/icon-publish.svg" alt="icon-active">
-                        <?php echo ($module_status === 'active') ? 'Inactive Module' : 'Active Module'; ?>
+                        <?php echo $new_module_status; ?>
                       </button>
                     </form>
 

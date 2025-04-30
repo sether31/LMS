@@ -9,221 +9,51 @@
   $get_course_id = $_GET['courseId'];
   $get_module_id = $_GET['moduleId'];
   
-  // lesson update message
-  if(isset($_SESSION['lesson-update-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-update-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-update-success']);
-  } 
+  $session_messages = [
+    // Lesson update
+    'lesson-update-success',
+    'lesson-update-failed',
+    'lesson-update-image-failed',
+    'lesson-update-image-error',
+    'lesson-update-video-failed',
+    'lesson-video-error',
   
-  if(isset($_SESSION['lesson-update-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-update-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-update-failed']);
-  }
+    // Lesson create
+    'lesson-create-success',
+    'lesson-create-failed',
+    'lesson-create-video-failed',
+    'lesson-create-success-failed',
   
-  if(isset($_SESSION['lesson-update-image-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-update-image-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-update-image-failed']);
-  } 
+    // Lesson delete
+    'lesson-delete-success',
+    'lesson-delete-failed',
+    'lesson-delete-error',
   
-  if(isset($_SESSION['lesson-update-image-error'])){
-    echo "
-    <script>
-      window.onload = ()=>{
-        alert(`{$_SESSION['lesson-update-image-error']}`);
-      }
-    </script>
-  ";
-    unset($_SESSION['lesson-update-image-error']);
-  } 
+    // Quiz create
+    'quiz-create-success',
+    'quiz-create-error',
   
-  if(isset($_SESSION['lesson-update-video-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-update-video-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-update-video-failed']);
-  } 
+    // Quiz update
+    'quiz-update-success',
+    'quiz-update-failed',
   
-  if(isset($_SESSION['lesson-video-error'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-video-error']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-video-error']);
-  }
-
-  // lesson create message
-  if(isset($_SESSION['lesson-create-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-create-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-create-success']);
-  }
-
-  if(isset($_SESSION['lesson-create-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-create-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-create-failed']);
-  } 
-
-  if(isset($_SESSION['lesson-create-video-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-create-video-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-create-video-failed']);
-  }
+    // Quiz delete
+    'quiz-delete-success',
+    'quiz-delete-failed'
+  ];
   
-  if(isset($_SESSION['lesson-create-success-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-create-success-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-create-success-failed']);
+  foreach ($session_messages as $key) {
+    if (isset($_SESSION[$key])) {
+      echo "
+        <script>
+          window.onload = () => {
+            alert(`{$_SESSION[$key]}`);
+          }
+        </script>
+      ";
+      unset($_SESSION[$key]);
+    }
   }
-
-  // lesson  message
-  if(isset($_SESSION['lesson-delete-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-delete-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-delete-success']);
-  }
-
-  if(isset($_SESSION['lesson-delete-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-delete-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-delete-failed']);
-  }
-
-  if(isset($_SESSION['lesson-delete-error'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['lesson-delete-error']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['lesson-delete-error']);
-  }
-
-  // create quiz message
-  if(isset($_SESSION['quiz-create-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['quiz-create-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['quiz-create-success']);
-  }
-
-  if(isset($_SESSION['quiz-create-error'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['quiz-create-error']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['quiz-create-error']);
-  }
-
-  // update quiz
-   if(isset($_SESSION['quiz-update-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['quiz-update-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['quiz-update-success']);
-  }
-
-  if(isset($_SESSION['quiz-update-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['quiz-update-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['quiz-update-failed']);
-  }
-
-  // delete quiz
-  if(isset($_SESSION['quiz-delete-success'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['quiz-delete-success']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['quiz-delete-success']);
-  }
-
-  if(isset($_SESSION['quiz-delete-failed'])){
-    echo "
-      <script>
-        window.onload = ()=>{
-          alert(`{$_SESSION['quiz-delete-failed']}`);
-        }
-      </script>
-    ";
-    unset($_SESSION['quiz-delete-failed']);
-  }
-
 
 ?>
 
@@ -232,7 +62,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Kitchenomachia Academy</title>
   <link rel="stylesheet" href="../../../assets/styles/teacher/course/viewLesson.css">
 </head>
 <body>
@@ -260,7 +90,7 @@
           &rarrlp; <?php echo ucfirst($container['description']) ?>
         </p>
 
-        <a href="./deleteLessonList.php?courseId=<?php echo $get_course_id ?>&moduleId=<?php echo $get_module_id ?>">Delete lesson history</a>
+        <a href="./deleteLessonList.php?courseId=<?php echo $get_course_id ?>&moduleId=<?php echo $get_module_id ?>" class="link">Delete History &#x21dd;</a>
       </div>
 
       <?php endif; ?>
@@ -275,7 +105,7 @@
             Create lesson
           </a>
           <?php 
-              $sql = "SELECT * FROM quiz_tb WHERE module_id = '$get_module_id'";
+              $sql = "select * from quiz_tb where module_id = '$get_module_id'";
               $container = mysqli_query($conn, $sql);
               
               if(mysqli_num_rows($container) > 0): 

@@ -1,31 +1,34 @@
 <?php 
   session_start();
-  include '../../db/connect.php';
+  include '../../../db/connect.php';
 
   if(!isset($_SESSION['user-id'])){
     die("Access denied. Please log in.");
   }
 
   $user_id = $_SESSION['user-id'];
-  
-  // enroll message
-  $session_messages = [
+  $alertKeys = [
+      // enroll message
     'enroll-course-success',
-    'enroll-course-failed'
+    'enroll-course-failed',
+      // un-enroll message
+    'unenroll-course-success',
+    'unenroll-course-failed'
   ];
 
-  foreach($session_messages as $key){
+  foreach ($alertKeys as $key) {
     if(isset($_SESSION[$key])){
       echo "
-        <script>
-          window.onload = () => {
-            alert(`{$_SESSION[$key]}`);
-          }
-        </script>
+          <script>
+            window.onload = () => {
+              alert(`{$_SESSION[$key]}`);
+            }
+          </script>
       ";
       unset($_SESSION[$key]);
     }
   }
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +37,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kitchenomachia Academy</title>
-  <link rel="stylesheet" href="../../assets/styles/student/course/myCourse.css">
+  <link rel="stylesheet" href="../../../assets/styles/student/course/myCourse.css">
 </head>
 <body>
   <header class="navbar">
@@ -46,13 +49,13 @@
       </article>
 
       <article class="logo">
-        <img src="../../assets/images/logo/logo-w-text.png" alt="logo">
+        <img src="../../../assets/images/logo/logo-w-text.png" alt="logo">
       </article>
 
       <nav class="nav">
-        <a href="" class="active">Dashboard</a>
-        <a href="./course/myCourse.php">My Courses</a>
-        <a href="./profile.php">Profile</a>
+        <a href="../dashboard.php">Dashboard</a>
+        <a class="active">My Courses</a>
+        <a href="../profile.php">Profile</a>
         <a href="../../src/auth/logout.php">Logout</a>
       </nav>
     </section>
@@ -61,35 +64,52 @@
   <section class="container-sm main-content">
     <article class="content-container">
       <div class="text">
-        <h2>&#10070; Courses</h2>
+        <h2>&#10070; My Courses</h2>
         <h3>Course overview</h3>
       </div>
       
       <div class="action-container">
         <div class="mini-container">
           <div class="search-bar">
-            <img src="../../assets/images/icons/icon-search.svg" alt="icon-search" class="icon">
+            <img src="../../../assets/images/icons/icon-search.svg" alt="icon-search" class="icon">
             <input type="text" id="search-input" placeholder="Search courses..." />
           </div>
         </div>
       </div>
 
       <div class="container-grid">
+        <!-- show active enroll courses -->
         <?php
-          $user_id =  $_SESSION['user-id'];
-          $sql = "select * from course_tb where is_delete = 0 and course_id not in (select course_id from student_course_tb where student_id = $user_id and status = 'enrolled') order by updated_at asc";
-
+          $sql = "
+            select 
+              c.course_id,
+              c.title,
+              c.description,
+              c.course_image,
+              c.status,
+              sc.finish,
+              sc.enrolled_at
+            from
+              student_course_tb sc
+            join 
+              course_tb c on sc.course_id = c.course_id
+            where 
+              sc.student_id = $user_id and
+              sc.status != 'withdrawn'
+            order by 
+              sc.enrolled_at asc
+          ";
           $container = mysqli_query($conn, $sql);
 
           if(mysqli_num_rows($container) > 0){
-            $course = false;
             while($row = mysqli_fetch_array($container)){
               $course_id = $row['course_id'];
-
               $course_title = ucwords($row['title']);
               $course_description = ucfirst($row['description']);
               $course_picture = $row['course_image']; 
               $course_status = $row['status'];
+              $is_finish = $row['finish'];
+
               $title_length = 25;
               $description_length = 20;
 
@@ -101,29 +121,30 @@
                 $course_description = substr($course_description, 0, $description_length) . "...";
               }
 
-              $status = ($course_status === 'publish') ? 'Available' : 'To be posted';
-              $title = ($course_status === 'publish') ? 'Enroll now' : 'This course is not available yet..';
-              $class = ($course_status === 'publish') ? 'btn-primary' : 'btn-disabled';
+              $status = ($is_finish === '0') ? 'Ongoing' : 'Complete';
               $disabled = ($course_status === 'publish') ? '' : 'disabled';
+              $class = ($course_status === 'publish') ? 'btn-primary' : 'btn-disabled'; 
+              $btn_name = ($course_status === 'publish') ? 'Unenroll' : 'Maintenance'; 
 
+
+              // display card
               echo "
                 <article class='card'>
                   <p class='publish'>{$status}</p>
                   <div class='card-image'>
-                    <a href='./course/viewOnlyCourse.php?courseId=$course_id'>
-                      <img src='../../{$course_picture}' alt='course_picture'>
+                    <a href=''>
+                      <img src='../../../{$course_picture}' alt='course_picture'>
                     </a>
                   </div>
                   <div class='card-content'>
-                    <a href='./course/viewOnlyCourse.php?courseId=$course_id' class='card-title'>{$course_title}</a>
+                    <a href='./viewCourse.php?courseId=$course_id' class='card-title'>{$course_title}</a>
                     <p class='card-description'>{$course_description}</p>
-
-                    <form action='../../src/student/enrollment.php' method='post' class='enrollment-form' onsubmit='return confirm(`Are you sure you want to enroll to {$course_title}?`);'>
+                    <form action='../../../src/student/unEnroll.php' method='post' class='enrollment-form' onsubmit='return confirm(`Are you sure you want to un-enroll to {$course_title}?`);'>
                       <input type='hidden' name='course-id' value='$course_id'>
                       <input type='hidden' name='course-title' value='$course_title'>
                       <input type='hidden' name='student-id' value='$user_id'>
-                      <button class='{$class}' title='{$title}' type='submit' {$disabled}>
-                        Enroll
+                      <button class='{$class}' title='' type='submit' {$disabled}>
+                        {$btn_name}
                       </button>
                     </form>
                   </div>
@@ -131,16 +152,15 @@
               ";
             }
           } else{
-            echo "<h2 class='no-course'>No courses available.</h2>";
+            echo "<h2 class='no-course'>No enrolled courses.</h2>";
           }
-         
         ?>
       </div>
     </article>
   </section>
   
-  <script src="../../scripts/utils/navbar.js"></script>
-  <script src="../../scripts/student/dashboard.js"></script>
+  <script src="../../../scripts/utils/navbar.js"></script>
+  <script src="../../../scripts/student/course.myCourse.js"></script>
 </body>
 </html>
 

@@ -1,0 +1,107 @@
+@import '../../share/main.css';
+@import '../../share/navbar.css';
+@import '../../teacher/course/sidebar.css';
+
+body{
+  background-color: var(--white);
+}
+
+.content-container{
+  margin-block: 6rem 8rem;
+  padding-inline: 2rem;
+  transition: transform .3s ease-in-out;
+  transform: translateX(0);
+  
+  & .course-container{
+    & .course-content{
+      margin-bottom: 2rem;
+
+      & .module-section{
+        margin-bottom:2rem;
+      }
+
+      & .course-picture{
+        width: 100%;
+        height: 200px;
+        border-radius: .5rem;
+  
+        & img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: inherit;
+        }
+      }
+
+      & .course-title{
+        margin-block: 2rem;
+      }
+
+      & .course-description{
+        font-style: italic;
+        text-indent: 1rem;
+        margin-bottom:1rem;
+      }
+    }
+  }
+}
+
+
+.hr{
+  margin-block: 2rem;
+  border: 1px dashed #eaeaea;
+}
+
+.desc, .content{
+  margin-block:1rem!important;
+  color: var(--gray);
+}
+
+
+.card-container{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-inline: 2rem;
+
+  & .card-course-container{
+    flex: 1;
+    text-align: center;
+
+    & img{
+      width: calc(var(--text-2xl) + 1rem);
+      margin: 0 auto 1.5rem;
+    }
+  
+    & .card-course-wrapper{
+      padding: 1.5rem 2rem;
+      border: 1px solid lightgray;
+      background-color: var(--primary);
+    }
+  
+    & .card-course-title{
+      margin-bottom: 1rem;
+      color: var(--black);
+    }
+  }  
+}
+
+.enrollment-form{
+  margin-top: 5rem;
+
+  & .btn-primary,
+  & .btn-disabled{
+    display: block;
+    height: auto;
+    width: max-content;
+    margin-inline: auto;
+    padding: 1rem 3rem;
+    border-radius: .5rem;
+  }
+
+  & .btn-disabled{
+    font-size: var(--text-md);
+    background-color: lightgray;
+    border: none;
+  }
+}

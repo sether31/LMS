@@ -1,12 +1,12 @@
 <?php
-include '../../../db/connect.php';
-session_start();
-if (!isset($_SESSION['user-id'])) {
-  die("Access denied. Please log in.");
-}
-  
-$get_course_id = $_GET['courseId'];
-$get_module_id = $_GET['moduleId'];
+  include '../../../db/connect.php';
+  session_start();
+  if (!isset($_SESSION['user-id'])) {
+    die("Access denied. Please log in.");
+  }
+    
+  $get_course_id = $_GET['courseId'];
+  $get_module_id = $_GET['moduleId'];
 
 ?>
 

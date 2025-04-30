@@ -14,12 +14,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $update_lesson_title = trim($_POST['update-lesson-title']);
   $update_lesson_content = trim($_POST['update-lesson-content']);
 
-  $sql = "update lesson_tb set title = '$update_lesson_title', content = '$update_lesson_content' where lesson_id = '$lesson_id'";
-  if(mysqli_query($conn, $sql)){
+  $stmt = $conn->prepare("UPDATE lesson_tb SET title = ?, content = ? WHERE lesson_id = ?");
+  $stmt->bind_param("ssi", $update_lesson_title, $update_lesson_content, $lesson_id);
+
+  if($stmt->execute()){
     $_SESSION['lesson-update-success'] = "Lesson updated successfully!";
   } else{
-    $_SESSION['lesson-update-failed'] = "Failed to update lesson: " . mysqli_error($conn);
+    $_SESSION['lesson-update-failed'] = "Failed to update lesson: " . $stmt->error;
   }
+
 
   $check_image = null;
   $check_video = null;

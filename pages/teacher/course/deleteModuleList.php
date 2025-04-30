@@ -3,37 +3,23 @@
   session_start();
 
   // module recover message
-  if(isset($_SESSION['recover-module-success'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-module-success']}`);
-            }
-        </script>
-    ";
-    unset($_SESSION['recover-module-success']);
-  }
+  $session_messages = [
+    'recover-module-success',
+    'recover-module-failed',
+    'recover-module-error'
+  ];
 
-  if(isset($_SESSION['recover-module-failed'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-module-failed']}`);
+  foreach($session_messages as $key){
+    if(isset($_SESSION[$key])){
+      echo "
+          <script>
+            window.onload = () => {
+              alert(`{$_SESSION[$key]}`);
             }
-        </script>
-    ";
-    unset($_SESSION['recover-module-failed']);
-  }
-
-  if(isset($_SESSION['recover-module-error'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-module-error']}`);
-            }
-        </script>
-    ";
-    unset($_SESSION['recover-module-error']);
+          </script>
+      ";
+      unset($_SESSION[$key]);
+    }
   }
 
   $user_id = $_SESSION['user-id'];

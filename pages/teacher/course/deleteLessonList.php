@@ -3,37 +3,23 @@
   session_start();
 
   // lesson recover message
-  if(isset($_SESSION['recover-lesson-success'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-lesson-success']}`);
-            }
-        </script>
-    ";
-    unset($_SESSION['recover-lesson-success']);
-  }
+  $session_messages = [
+    'recover-lesson-success',
+    'recover-lesson-failed',
+    'recover-lesson-error'
+  ];
 
-  if(isset($_SESSION['recover-lesson-failed'])){
-    echo "
+  foreach($session_messages as $key){
+    if(isset($_SESSION[$key])){
+      echo "
         <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-lesson-failed']}`);
-            }
+          window.onload = () => {
+            alert(`{$_SESSION[$key]}`);
+          }
         </script>
-    ";
-    unset($_SESSION['recover-lesson-failed']);
-  }
-
-  if(isset($_SESSION['recover-lesson-error'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-lesson-error']}`);
-            }
-        </script>
-    ";
-    unset($_SESSION['recover-lesson-error']);
+      ";
+      unset($_SESSION[$key]);
+    }
   }
 
   $user_id = $_SESSION['user-id'];

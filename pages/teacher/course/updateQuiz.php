@@ -2,37 +2,37 @@
   include '../../../db/connect.php';
   session_start();
 
-  if (!isset($_SESSION['user-id'])) {
-      die("Access denied. Please log in.");
+  if(!isset($_SESSION['user-id'])){
+    die("Access denied. Please log in.");
   }
 
   $get_course_id = $_GET['courseId'];
   $get_module_id = $_GET['moduleId'];
 
   // Get quiz info
-  $quiz_query = "SELECT * FROM quiz_tb WHERE module_id = '$get_module_id'";
+  $quiz_query = "select * from quiz_tb where module_id = '$get_module_id'";
   $quiz_result = mysqli_query($conn, $quiz_query);
   $quiz = mysqli_fetch_assoc($quiz_result);
 
   $quiz_title = $quiz['title'];
 
-  if (!$quiz) {
-      die("No quiz found to update.");
+  if(!$quiz){
+    die("No quiz found to update.");
   }
 
   $quiz_id = $quiz['quiz_id'];
 
-  $sql = "SELECT * FROM quiz_question_tb WHERE quiz_id = '$quiz_id'";
+  $sql = "select * from quiz_question_tb where quiz_id = '$quiz_id'";
   $questions_result = mysqli_query($conn, $sql);
 
   $questions = [];
-  while ($row = mysqli_fetch_assoc($questions_result)) {
+  while($row = mysqli_fetch_assoc($questions_result)){
       $question_id = $row['question_id'];
-      $answer_query = "SELECT correct FROM quiz_answer_key_tb WHERE question_id = '$question_id'";
+      $answer_query = "select correct from quiz_answer_key_tb where question_id = '$question_id'";
       $answer_result = mysqli_query($conn, $answer_query);
       $answers = [];
-      while ($a = mysqli_fetch_assoc($answer_result)) {
-          $answers[] = $a['correct'];
+      while($a = mysqli_fetch_assoc($answer_result)){
+        $answers[] = $a['correct'];
       }
 
       $row['answers'] = $answers;
@@ -128,8 +128,8 @@
     typeSelectors.forEach((select) => {
       select.addEventListener('change', (e) => {
         const selectedType = e.target.value;
-        const nameAttr = select.getAttribute('name'); // e.g. "type-2"
-        const questionIndex = nameAttr.split('-')[1]; // get "2"
+        const nameAttr = select.getAttribute('name'); 
+        const questionIndex = nameAttr.split('-')[1];
         updateAnswerInputs(questionIndex, selectedType);
       });
     });

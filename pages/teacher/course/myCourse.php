@@ -1,39 +1,24 @@
  <?php 
   include '../../../src/teacher/createCourse.php'; 
 
-  if(isset($_SESSION['delete-course-success'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['delete-course-success']}`);
-           }
-        </script>
-    ";
-    unset($_SESSION['delete-course-success']);
-  }
+  $session_messages = [
+    'delete-course-success',
+    'delete-course-failed',
+    'delete-course-error'
+  ];
 
-  if(isset($_SESSION['delete-course-failed'])){
+foreach($session_messages as $key){
+  if(isset($_SESSION[$key])){
     echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['delete-course-failed']}`);
-           }
-        </script>
+      <script>
+        window.onload = () => {
+          alert(`{$_SESSION[$key]}`);
+        }
+      </script>
     ";
-    unset($_SESSION['delete-course-failed']);
+    unset($_SESSION[$key]);
   }
-
-  if(isset($_SESSION['delete-course-error'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['delete-course-error']}`);
-           }
-        </script>
-    ";
-    unset($_SESSION['delete-course-error']);
-  }
-
+}
   
  ?>
 <!DOCTYPE html>
@@ -102,8 +87,8 @@
               $course_description = ucfirst($row['description']);
               $course_picture = $row['course_image']; 
               $course_status = strtoupper($row['status']);
-              $title_length = 50;
-              $description_length = 20;
+              $title_length = 25;
+              $description_length = 30;
 
               if(strlen($course_title) > $title_length){
                 $course_title = substr($course_title, 0, $title_length) . "...";

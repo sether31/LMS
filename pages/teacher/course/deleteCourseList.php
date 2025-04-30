@@ -1,40 +1,25 @@
 <?php 
   include '../../../src/teacher/createCourse.php'; 
 
-  // course recover message
-  if(isset($_SESSION['recover-course-success'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-course-success']}`);
-            }
-        </script>
-    ";
-    unset($_SESSION['recover-course-success']);
-  }
+  $recoverCourseAlerts = [
+    'recover-course-success',
+    'recover-course-failed',
+    'recover-course-error'
+  ];
 
-  if(isset($_SESSION['recover-course-failed'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-course-failed']}`);
+  foreach($recoverCourseAlerts as $key){
+      if(isset($_SESSION[$key])){
+        echo "
+          <script>
+            window.onload = () => {
+              alert(`{$_SESSION[$key]}`);
             }
-        </script>
-    ";
-    unset($_SESSION['recover-course-failed']);
+          </script>
+        ";
+      unset($_SESSION[$key]);
+    }
   }
-
-  if(isset($_SESSION['recover-course-error'])){
-    echo "
-        <script>
-          window.onload = ()=>{
-            alert(`{$_SESSION['recover-course-error']}`);
-            }
-        </script>
-    ";
-    unset($_SESSION['recover-course-error']);
-  }
-  
+    
 ?>
 
 <!DOCTYPE html>

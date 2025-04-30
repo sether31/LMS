@@ -9,8 +9,7 @@
   & span{
     display: flex;
     gap: .5rem;
-    & .create-lesson-btn,
-    & .create-quiz-btn{
+    & .take-quiz-btn{
       display: block;
       width: max-content;
       border-radius: .5rem;
@@ -34,15 +33,6 @@
   left: 5%;
 }
 
-.link{
-  text-decoration: underline; 
-  text-underline-offset: .6rem;
-
-  &:hover{
-    color: var(--secondary);
-  }
-}
-
 .content-container{
   margin-block: 6rem 4rem;
   padding-inline: 2rem;
@@ -64,7 +54,6 @@
 
       & .description{
         text-indent: 1rem;
-        margin-bottom: 2rem;
       }
     }
 
@@ -233,48 +222,7 @@ form{
   color: var(--gray);
 }
 
-.delete-lesson-form{
-  margin: 1rem auto 0;
-  width: max-content;
-  padding: .8rem 1rem;
-  border-radius: .5rem;
-  background-color: var(--invalid);
-  transition: .3s ease-in-out;
-
-  &:hover{
-    opacity: .9;
-  }
-
-  & .delete-lesson{
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    font-size: var(--text-lg);
-    color: var(--white);
-    background: none; 
-    border: none; 
-    padding: 0; 
-    
-    & img{
-      width: var(--text-xl);
-    }
-  }
-}
-
 
 @media screen and (max-width: 768px){
-  .media-container{
-    flex-direction: column;
-  }
 
-  .delete-lesson-form{
-    width: 100%!important;
-    padding: .8rem 0;
-
-    & .delete-lesson{
-      width:100%;
-      justify-content:center!important;
-      align-items:center!important;
-    }
-  }
 }

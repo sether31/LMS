@@ -1,47 +1,48 @@
 <?php
-include 'PHPMailer/src/PHPMailer.php';
-include 'PHPMailer/src/Exception.php';
-include 'PHPMailer/src/SMTP.php';
+  include 'PHPMailer/src/PHPMailer.php';
+  include 'PHPMailer/src/Exception.php';
+  include 'PHPMailer/src/SMTP.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\Exception;
 
-function sendOTP($to_email, $otp_code, $name, $purpose, $expires_at){
-  $email = new PHPMailer(true);
+  function sendOTP($to_email, $otp_code, $name, $purpose, $expires_at){
+    $email = new PHPMailer(true);
 
-  try{
-    $email->isSMTP();
-    $email->Host = "smtp.gmail.com"; 
-    $email->SMTPAuth = true;
-    $email->Username = "kitchenomachiaacademy@gmail.com";
-    $email->Password = "zoxrtoykdqpidnoj"; 
-    $email->SMTPSecure = "tls";
-    $email->Port = 587;
+    try{
+      $email->isSMTP();
+      $email->Host = "smtp.gmail.com"; 
+      $email->SMTPAuth = true;
+      $email->Username = "kitchenomachiaacademy@gmail.com";
+      $email->Password = "zoxrtoykdqpidnoj"; 
+      $email->SMTPSecure = "tls";
+      $email->Port = 587;
 
-    // recipient
-    $email->setFrom("kitchenomachiaacademy@gmail.com","Kitchenomachia Academy");
-    $email->addAddress($to_email, $name);
+      // recipient
+      $email->setFrom("kitchenomachiaacademy@gmail.com","Kitchenomachia Academy");
+      $email->addAddress($to_email, $name);
 
-    // content
-    $email->isHTML(true);
-    $email->Subject = "Kitchenomachia Academy " . strtoupper($purpose) . " OTP Code";
-    $email->Body = "
-      <p>Hello <strong>$name</strong>,</p>
-      <p>
-        Your OTP code for $purpose is: 
-        <strong>$otp_code</strong>
-      </p>
-      <p>This code will be expired at $expires_at</p>
-      <br>
-      <p>
-        Best regards,
+      // content
+      $email->isHTML(true);
+      $email->Subject = "Kitchenomachia Academy " . strtoupper($purpose) . " OTP Code";
+      $email->Body = "
+        <p>Hello <strong>$name</strong>,</p>
+        <p>
+          Your OTP code for $purpose is: 
+          <strong>$otp_code</strong>
+        </p>
+        <p>This code will be expired at $expires_at</p>
         <br>
-        Kitchenomachia Academy
-      </p>
-    ";
+        <p>
+          Best regards,
+          <br>
+          Kitchenomachia Academy
+        </p>
+      ";
 
-    $email->send();
-  } catch(Exception $e) {
-    echo "error: {$email->ErrorInfo}";
+      $email->send();
+    } catch(Exception $e) {
+      echo "error: {$email->ErrorInfo}";
+    }
   }
-}
+?>

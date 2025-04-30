@@ -16,7 +16,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kitchenomachia Academy</title>
-  <link rel="stylesheet" href="../../../assets/styles/teacher/course/viewCourse.css">
+  <link rel="stylesheet" href="../../../assets/styles/student/course/viewCourse.css">
 </head>
 <body>
   <header class="navbar">
@@ -40,82 +40,8 @@
     </section>
   </header>
 
-  <div class="sidebar-hamburger-btn">
-      <span></span>
-      <span></span>
-      <span></span>
-  </div>
-
-  <aside class="sidebar">
-    <section>
-    
-    </section>
-
-    <nav>
-      <ul>
-        <li class="main-list">
-          <a href="#" class="module-btn">
-            <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book-dark" class="icon icon-book-dark">
-            <img src="../../../assets/images/icons/icon-book-light.svg" alt="icon-book-light" class="icon icon-book-light">
-            Module 1
-            <span>
-              <img src="../../../assets/images/icons/icon-arrow-dark.svg" alt="icon-book" class="icon-arrow-dark">
-              <img src="../../../assets/images/icons/icon-arrow-light.svg" alt="icon-book" class="icon-arrow-light">
-            </span>
-          </a>
-          <ul class="module-content">
-            <li class="sub-list">
-              <a href="#">
-                <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book" class="icon">
-                Lesson 1
-              </a>
-            </li>
-            <li class="sub-list">
-              <a href="#">
-                <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book" class="icon">
-                Lesson 2
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="main-list">
-          <a href="#" class="module-btn">
-            <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book-dark" class="icon icon-book-dark">
-            <img src="../../../assets/images/icons/icon-book-light.svg" alt="icon-book-light" class="icon icon-book-light">
-            Module 2
-            <span>
-              <img src="../../../assets/images/icons/icon-arrow-dark.svg" alt="icon-book" class="icon-arrow-dark">
-              <img src="../../../assets/images/icons/icon-arrow-light.svg" alt="icon-book" class="icon-arrow-light">
-            </span>
-          </a>
-          <ul class="module-content">
-            <li class="sub-list">
-              <a href="#">
-                <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book-dark" class="icon">
-                Lesson 1
-              </a>
-            </li>
-            <li class="sub-list">
-              <a href="#">
-                <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book-dark" class="icon">
-                Lesson 2
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </aside>
-
   <section class="container-md content-container">
     <article class="wrapper">
-      <div class="tabs">
-        <nav>
-          <a href="" class="active">Course</a>
-          <a href="./viewCourseSettings.php?courseId=<?php echo $_GET['courseId']?>">Settings</a>
-          <a href="./participants.php?courseId=<?php echo $_GET['courseId']?>">Participants</a>
-        </nav>
-      </div>
       <div class="course-container">
         <!-- display course -->
         <div class="course-content">
@@ -150,7 +76,7 @@
         <!-- display module --> 
         <div class="module-container">
           <?php
-            $sql = "select * from module_tb where course_id = '$get_course_id' and is_delete = 0";
+            $sql = "select * from module_tb where course_id = '$get_course_id' and is_delete = 0 and status = 'active'";
             $container = mysqli_query($conn, $sql);
             if(mysqli_num_rows($container) > 0):
               while($row = mysqli_fetch_array($container)):
@@ -169,10 +95,12 @@
                 </label>
 
                 <div class="accordion-content">
-                  <h4 class='desc'>Description</h4>
+                  <h4 class="desc">Description</h4>
                   <p class="module-description">
                     &rarrlp; <?php echo ucfirst($module_description); ?>
                   </p>
+
+                  <a href="./viewModule.php?courseId=<?php echo $get_course_id; ?>&moduleId=<?php echo $module_id; ?>" class="link">&#x21e8; View Module</a>
     
                   <hr class="hr">
                   <h3>&#10070; Lessons</h3>
@@ -211,6 +139,8 @@
                           <p class="lesson-content">
                             &rarrlp; <?php echo ucfirst($lesson_content); ?>
                           </p>
+
+                          <a href="" class="link">&#x21e8; View Lesson</a>
                         </div>                      
                       </div>
                     </div>
@@ -243,6 +173,6 @@
   </section>
 
   <script src="../../../scripts/utils/navbar.js"></script>
-  <script src="../../../scripts/teacher/viewCourse.js"></script>
+  <script src="../../../scripts/student/viewCourse.js"></script>
 </body>
 </html>
