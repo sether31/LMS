@@ -6,8 +6,30 @@
     die("Access denied. Please log in.");
   }
     
+  $user_id = $_SESSION['user-id'];
   $get_course_id = $_GET['courseId'];
   $get_module_id = $_GET['moduleId'];
+
+  // quiz take success
+  $session_messages = [
+    'quiz-take-success',
+    'quiz-take-failed',
+    'quiz-pass',
+    'quiz-fail'
+  ];
+
+  foreach($session_messages as $key){
+    if(isset($_SESSION[$key])){
+      echo "
+        <script>
+          window.onload = () => {
+            alert(`{$_SESSION[$key]}`);
+          }
+        </script>
+      ";
+      unset($_SESSION[$key]);
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -33,17 +55,16 @@
           $container = mysqli_fetch_array($container);
         
       ?>
-      <div class="module">
-        <h2 class="title">
-          <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book">
-          <?php echo ucwords($container['title']) ?>
-        </h2>
-        <h4 class='desc'>Description</h4>
-        <p class="description">
-          &rarrlp; <?php echo ucfirst($container['description']) ?>
-        </p>
+        <div class="module">
+          <h2 class="title">
+            <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book">
+            <?php echo ucwords($container['title']) ?>
+          </h2>
+          <h4 class='desc'>Description</h4>
+          <p class="description">
+            &rarrlp; <?php echo ucfirst($container['description']) ?>
+          </p>
       </div>
-
       <?php endif; ?>
 
       <hr class="hr">
@@ -52,7 +73,24 @@
       <div class="flex">
         <h3>&#10070; LESSONS SECTION</h3>
         <span>
-          <a href="" class="take-quiz-btn">
+          <!-- check if lesson and complete lesson are equal if yes then allow quiz -->
+          <?php
+            $sql = "
+              select count(l.lesson_id) as total_lessons, count(lc.lesson_id) as completed_lessons from lesson_tb l left join lesson_completion_tb lc on l.lesson_id = lc.lesson_id and lc.user_id = $user_id where l.module_id = $get_module_id and l.is_delete = 0
+          ";
+            $container = mysqli_query($conn, $sql);
+
+            $row = mysqli_fetch_array($container);
+        
+            $total_lessons = $row['total_lessons'] ?? 0;
+            $completed_lessons = $row['completed_lessons'] ?? 0;
+
+            $check = ($total_lessons > 0 && $total_lessons == $completed_lessons);
+            $disabled = $check ? '' : 'pointer-events: none; opacity: 0.8;';
+            
+          ?>
+
+          <a href="./takeQuiz.php?courseId=<?php echo $get_course_id ?>&moduleId=<?php echo $get_module_id ?>" class="take-quiz-btn" style="<?php echo $disabled; ?>">
             Take Quiz
           </a>
         </span>
@@ -76,7 +114,7 @@
             } else{
               $lesson_content = $row['content'];
             }
-        ?>
+      ?>
 
       <div class="accordion-container">      
         <!-- update lesson -->
@@ -89,11 +127,11 @@
             </span>
           </label>
           <div class="accordion-content">
-            <pre class="lesson-content">
-              &rarrlp; <?php echo ucfirst($lesson_content); ?>
-            </pre>
+            <pre class="lesson-content"> &rarrlp; <?php echo ucfirst($lesson_content); ?></pre>
 
-            <a href="" class="link">&#x21e8; View Lesson</a> 
+            <a href="./viewLesson.php?courseId=<?php echo $get_course_id ?>&moduleId=<?php echo $get_module_id ?>&lessonId=<?php echo $lesson_id ?>" class="link">
+              &#x21e8; View Lesson
+            </a> 
           </div>
         </div>
 
