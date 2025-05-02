@@ -1,0 +1,53 @@
+@import '../../share/main.css';
+
+.back{
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-500);
+  position: absolute;
+  top: 1rem;
+  left: 5%;
+}
+
+.quiz-container{
+  margin-block: 5rem 6rem;
+  padding-inline: 2rem;
+
+  & .quiz-title{
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  & .question-block{
+    margin-bottom: 1rem;
+
+    & .question{
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+
+
+    & label{
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      
+      & input[type="radio"]{
+        accent-color: var(--secondary);
+        margin: 0 0 0 1.5rem;
+      }
+      
+      & input[type="radio"]:checked + p{
+        color: var(--secondary);
+      }
+    }
+  }
+
+  & .btn-primary{
+    display: block;
+    height: auto;
+    width: max-content;
+    padding: .8rem 1.5rem;
+    margin: 3rem auto 0;
+  }
+}
