@@ -108,6 +108,10 @@
         padding: 0 2rem;
         color: var(--black);
         transition: .3s ease-in-out;
+
+        & .lesson-content{
+          margin-bottom: 3rem;
+        }
       }
   
       & input[type="checkbox"]:checked ~ .accordion-content{
@@ -220,6 +224,15 @@ form{
 .desc{
   margin-block:3rem 1rem;
   color: var(--gray);
+}
+
+.link{
+  text-decoration: underline; 
+  text-underline-offset: .6rem;
+
+  &:hover{
+    color: var(--secondary);
+  }
 }
 
 

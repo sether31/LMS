@@ -72,11 +72,8 @@
   z-index: 99;
 
   display: grid;
-  grid-template-rows: .2fr 1.8fr;
 
-  & .logo{
-    width: 250px;
-  }
+ 
 
   & .icon{
     width: var(--text-xl);
@@ -89,7 +86,7 @@
   }
 
   & nav{
-    margin-top: 2rem;
+    margin-top: 4rem;
   }
 
   & nav ul{
@@ -101,12 +98,12 @@
     position: relative;
     color: var(--black);
     font-size: var(--text-lg);
-    margin-inline: 2rem;
-    padding: 1rem;
+    margin-inline: 1rem;
+    padding: .5rem;
     font-weight: var(--fw-600);
 
     display: flex;
-    gap: .3rem;
+    gap: .5rem;
   }
   
 
@@ -154,7 +151,7 @@
     & a{
       font-size: var(--text-md);
       color: var(--black);
-      padding-left: 3rem;
+      padding-left: 2rem;
 
       &:hover{
         color: var(--secondary)!important;
@@ -165,7 +162,7 @@
   & nav ul .main-list a span{
     position: absolute;
     top: 50%;
-    right: 20px;
+    right: 10px;
     width: var(--text-md);
     transform: translateY(-50%);
     transition: transform 0.4s;

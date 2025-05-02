@@ -6,6 +6,11 @@ body{
   background-color: var(--white);
 }
 
+.locked {
+  opacity: .7;
+  pointer-events: none;
+}
+
 .content-container{
   margin-block: 6rem 10rem;
   padding-inline: 2rem;

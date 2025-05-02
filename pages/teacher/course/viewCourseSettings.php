@@ -77,59 +77,47 @@
   </div>
 
   <aside class="sidebar">
-    <span></span>
     <nav>
       <ul>
-        <li class="main-list">
-          <a href="#" class="module-btn">
-            <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book-dark" class="icon icon-book-dark">
-            <img src="../../../assets/images/icons/icon-book-light.svg" alt="icon-book-light" class="icon icon-book-light">
-            Module 1
-            <span>
-              <img src="../../../assets/images/icons/icon-arrow-dark.svg" alt="icon-book" class="icon-arrow-dark">
-              <img src="../../../assets/images/icons/icon-arrow-light.svg" alt="icon-book" class="icon-arrow-light">
-            </span>
-          </a>
-          <ul class="module-content">
-            <li class="sub-list">
-              <a href="#">
-                <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book" class="icon">
-                Lesson 1
-              </a>
-            </li>
-            <li class="sub-list">
-              <a href="#">
-                <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book" class="icon">
-                Lesson 2
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="main-list">
-          <a href="#" class="module-btn">
-            <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book-dark" class="icon icon-book-dark">
-            <img src="../../../assets/images/icons/icon-book-light.svg" alt="icon-book-light" class="icon icon-book-light">
-            Module 2
-            <span>
-              <img src="../../../assets/images/icons/icon-arrow-dark.svg" alt="icon-book" class="icon-arrow-dark">
-              <img src="../../../assets/images/icons/icon-arrow-light.svg" alt="icon-book" class="icon-arrow-light">
-            </span>
-          </a>
-          <ul class="module-content">
-            <li class="sub-list">
-              <a href="#">
-                <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book-dark" class="icon">
-                Lesson 1
-              </a>
-            </li>
-            <li class="sub-list">
-              <a href="#">
-                <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book-dark" class="icon">
-                Lesson 2
-              </a>
-            </li>
-          </ul>
-        </li>
+        <?php
+        $get_modules = mysqli_query($conn, "select * from module_tb where course_id = '$get_course_id' and status = 'active' and is_delete = 0");
+        while($mod = mysqli_fetch_assoc($get_modules)){
+            $module_id = $mod['module_id'];
+            $module_title = $mod['title'];
+            
+            echo "
+            <li class='main-list'>;
+              <a href='#' class='module-btn'>
+                <img src='../../../assets/images/icons/icon-book-dark.svg' alt='icon-book-dark' class='icon icon-book-dark'>
+                <img src='../../../assets/images/icons/icon-book-light.svg' alt='icon-book-light' class='icon icon-book-light'>
+
+                $module_title
+
+                <span>
+                  <img src='../../../assets/images/icons/icon-arrow-dark.svg' alt='icon-arrow-dark' class='icon-arrow-dark'>
+                  <img src='../../../assets/images/icons/icon-arrow-light.svg' alt='icon-arrow-light' class='icon-arrow-light'>
+                </span>
+              </a>  
+            ";
+
+            // Nested lessons
+            $get_lessons = mysqli_query($conn, "select * from lesson_tb where module_id = '$module_id' and is_delete = 0");
+            echo '<ul class="module-content">';
+            while($lesson = mysqli_fetch_assoc($get_lessons)){
+                $lesson_title = $lesson['title'];
+                echo "
+                  <li class='sub-list'>
+                    <a href='./viewLesson.php?courseId=$get_course_id&moduleId=$module_id'>
+                      <img src='../../../assets/images/icons/icon-book-dark.svg' alt='icon-book' class='icon'>
+                      $lesson_title
+                    </a>
+                  </li>
+                ";
+            }
+            echo '</ul>';
+          echo '</li>';
+        }
+        ?>
       </ul>
     </nav>
   </aside>
