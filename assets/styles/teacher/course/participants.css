@@ -1,0 +1,95 @@
+@import '../../share/main.css';
+@import '../../share/navbar.css';
+@import '../../teacher/course/sidebar.css';
+
+.content-container{
+  margin-block: 6rem 10rem;
+  padding-inline: 2rem;
+  transition: transform .3s ease-in-out;
+  transform: translateX(0);
+
+  & .tabs{
+    & nav{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid lightgray;
+
+      & a{
+        font-size: var(--text-lg);
+        font-weight: var(--fw-500);
+        border-bottom: 1px solid lightgray;
+        padding: 1rem;
+        border-bottom: 4px solid transparent;
+        transition: .3s ease-in-out;
+
+        &:hover{
+          color: var(--secondary);
+          border-color: var(--secondary);
+        }
+      }
+
+      & a.active{
+        color: var(--secondary);
+        border-color: var(--secondary);
+      }
+    }
+  }
+
+
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    border-radius: .3rem;
+    overflow-x: auto;
+    border: 1px solid lightgray;
+    min-width: 600px;
+    scrollbar-width: thin; 
+    -webkit-scrollbar-width: thin; 
+  
+    & th{
+      font-weight: var(--fw-600);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+  
+    & th, td {
+      padding: 1rem;
+      text-align: left;
+      border: 1px solid lightgray;
+    }
+  
+  
+    & tbody tr{
+      transition: .3s ease-in-out;
+  
+      &:hover{
+        background-color: #fafafa;
+      }
+    }
+  
+    
+    & .status-enrolled{
+      color: var(--valid);
+      font-weight: bold;
+    }
+    
+    & .status-withdrawn{
+      color: var(--secondary);
+      font-weight: bold;
+    } 
+  }
+}
+
+
+
+
+
+
+
+
+
+
