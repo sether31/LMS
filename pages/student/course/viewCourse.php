@@ -78,95 +78,52 @@
           <?php
             $sql = "select * from module_tb where course_id = '$get_course_id' and is_delete = 0 and status = 'active'";
             $container = mysqli_query($conn, $sql);
-            if(mysqli_num_rows($container) > 0):
-              while($row = mysqli_fetch_array($container)):
-                $module_id = $row['module_id'];
-                $module_title = $row['title'];
-                $module_description= $row['description'];
-          ?>
-            <div class="accordion-container">
-              <div class="accordion-item">
-                <input type="checkbox" id="module-<?php echo $module_id ?>">
-                <label class="accordion-title" for="module-<?php echo $module_id ?>">
-                  <span>
-                    <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book">
-                    <h3><?php echo ucwords($module_title); ?></h3>
-                  </span>
-                </label>
+            $modules = [];
+            while($row = mysqli_fetch_array($container)){
+              $modules[] = $row; 
+            }         
 
-                <div class="accordion-content">
-                  <h4 class="desc">Description</h4>
-                  <p class="module-description">
-                    &rarrlp; <?php echo ucfirst($module_description); ?>
-                  </p>
+            foreach($modules as $index => $row):
+              $module_id = $row['module_id'];
+              $module_title = $row['title'];
+              $module_description = $row['description'];
+              $locked = false;
 
-                  <a href="./viewModule.php?courseId=<?php echo $get_course_id; ?>&moduleId=<?php echo $module_id; ?>" class="link">&#x21e8; View Module</a>
-    
-                  <hr class="hr">
-                  <h3>&#10070; Lessons</h3>
-                  <hr class="hr">
+              if($index === 0){
+                $locked = false;
+              } else{
+                $previous_module_passed = $modules[$index - 1]['is_pass']; 
 
-
-                  <!-- display lesson -->
-                  <?php
-                    $sql2 = "select * from lesson_tb where module_id = '$module_id' and is_delete = 0";
-                    $container2 = mysqli_query($conn, $sql2);
-                    if(mysqli_num_rows($container2) > 0):
-                      while($row2 = mysqli_fetch_array($container2)):
-                        $lesson_id = $row2['lesson_id'];
-                        $lesson_title = $row2['title'];
-                        $lesson_content = $row2['content'];
-                        $lesson_content_length = 200;
-                        
-                        if(strlen($lesson_content) >= $lesson_content_length){
-                          $lesson_content = substr($row2['content'], 0, $lesson_content_length) . "...";
-                        } else{
-                          $lesson_content = $row2['content'];
-                        }
-                  ?>
-                    <div class="accordion-container2">
-                      <div class="accordion-item2">
-                        <input type="checkbox" id="item-<?php echo $lesson_id ?>">
-                        <label class="accordion-title2" for="item-<?php echo $lesson_id ?>">
+                if($previous_module_passed == 1){
+                  $locked = false; 
+                } else {
+                  $locked = true; 
+                }
+              }
+            ?>
+              <div class="accordion-container">
+                  <div class="accordion-item <?php echo $locked ? 'locked' : ''; ?>">
+                      <input type="checkbox" id="module-<?php echo $module_id ?>" <?php echo $locked ? 'disabled' : ''; ?>>
+                      <label class="accordion-title" for="module-<?php echo $module_id ?>">
                           <span>
-                            <img src="../../../assets/images/icons/icon-lesson.svg" alt="icon-lesson">
-                            <h3><?php echo ucwords($lesson_title); ?></h3>
+                              <img src="../../../assets/images/icons/icon-book-dark.svg" alt="icon-book">
+                              <h3><?php echo ucwords($module_title); ?> <?php echo $locked ? '(&#128274; Locked)' : '&#128275;'; ?></h3>
                           </span>
-                        </label>
+                      </label>
 
-                        <div class="accordion-content2">
-                        <h4 class='content'>Content</h4>
-                          <p class="lesson-content">
-                            &rarrlp; <?php echo ucfirst($lesson_content); ?>
+                      <div class="accordion-content">
+                          <h4 class="desc">Description</h4>
+                          <p class="module-description">
+                              &rarrlp; <?php echo ucfirst($module_description); ?>
                           </p>
 
-                          <a href="" class="link">&#x21e8; View Lesson</a>
-                        </div>                      
+                          <?php if(!$locked): ?>
+                            <a href="./viewModule.php?courseId=<?php echo $get_course_id; ?>&moduleId=<?php echo $module_id; ?>" class="link">&#x21e8; View Module</a>
+                          <?php endif; ?>
                       </div>
-                    </div>
-                  <?php 
-                      endwhile;
-                    else:
-                      echo "
-                        <h4 style='margin-top:3rem; text-align:center;'>
-                          No Lesson Found.
-                        </h4>
-                      ";
-                    endif;
-                  ?>
-                </div>
+                  </div>
               </div>
-            </div>
-          <?php 
-              endwhile;
-            else:
-              echo "
-                <h4 style='margin-top:3rem; text-align:center;'>
-                  No Module Found.
-                </h4>
-              ";
-            endif;
-          ?>
+            <?php endforeach; ?>
         </div>
       </div>
     </article>

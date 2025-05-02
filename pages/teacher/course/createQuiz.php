@@ -33,14 +33,14 @@
         <label for="num-question">
           <p>How many questions?</p>
         </label>
-        <input type="number" id="num-question" placeholder="1-50">
+        <input type="number" id="num-question" placeholder="1-50" required>
       </div>
 
       <div class="input-box">
         <label for="passing-score">
           <p>Passing Score (%)</p>
         </label>
-        <input type="number" id="passing-score" min="0" max="100" placeholder="0-100">
+        <input type="number" id="passing-score" min="0" max="100" placeholder="0-100" required>
       </div>
 
       <button onclick="generateQuestions()">
@@ -49,18 +49,6 @@
           Generate
         </span>
       </button>
-      <!-- <button onclick="addQuestion()">
-        <span>
-          <img src="../../../assets/images/icons/icon-add.svg" alt="icon-add">
-          Add Question
-        </span>
-      </button>
-      <button onclick="removeLastQuestion()">
-        <span>
-          <img src="../../../assets/images/icons/icon-minus.svg" alt="icon-minus">
-          Remove Question
-        </span>
-      </button> -->
     </div>
 
     <form id="quiz-form" method="post" action="../../../src/teacher/createQuiz.php?courseId=<?php echo $get_course_id?>&moduleId=<?php echo $get_module_id?>"></form>
