@@ -42,30 +42,40 @@
           </p>
         </article>
         <article class="box">
-          <p class="title">Total Participants</p>
-          <p class="value">22</p>
-        </article>
-        <article class="box">
-          <p class="title">Total Courses</p>
+          <p class="title">Total Publish Courses</p>
           <p class="value">
-            <?php echo $total_courses; ?>
+            <?php echo $total_publish_courses; ?>
           </p>
         </article>
         <article class="box">
-          <p class="title">Total Modules</p>
+          <p class="title">Total Unpublish Courses</p>
           <p class="value">
-            <?php echo $total_modules ?>
+            <?php echo $total_unpublish_courses; ?>
           </p>
         </article>
         <article class="box">
-          <p class="title">Total Lessons</p>
+          <p class="title">Total Active Modules</p>
           <p class="value">
-            <?php echo $total_lessons; ?>
+            <?php echo $total_active_modules; ?>
           </p>
         </article>
         <article class="box">
-          <p class="title">Students Passed</p>
-          <p class="value">26</p>
+          <p class="title">Total Inactive Modules</p>
+          <p class="value">
+            <?php echo $total_inactive_modules; ?>
+          </p>
+        </article>
+        <article class="box">
+          <p class="title">Total Active Lessons</p>
+          <p class="value">
+            <?php echo $total_active_lessons; ?>
+          </p>
+        </article>
+        <article class="box">
+          <p class="title">Total Inactive Lessons</p>
+          <p class="value">
+            <?php echo $total_inactive_lessons; ?>
+          </p>
         </article>
       </div>
 
@@ -77,30 +87,20 @@
       <div class="chart-container">
         <article class="box chart-box">
           <canvas id="total-module-lesson"></canvas>
-          <div class="download-btn">
-            <button onclick="downloadChart('total-module-lesson')">Download Chart</button>
-            <button onclick="downloadCSV('total-module-lesson')">Download CSV</button>
-          </div>
         </article>
 
         <article class="box chart-box">
-          <canvas id="quiz-fail-pass-module"></canvas>
-          <div class="download-btn">
-            <button onclick="downloadChart('quiz-fail-pass-module')">Download Chart</button>
-            <button onclick="downloadCSV('quiz-fail-pass-module')">Download CSV</button>
-          </div>
+          <canvas id="total-attempts"></canvas>
         </article>
 
         <article class="box chart-box">
           <canvas id="total-pass-fail"></canvas>
-          <div class="download-btn">
-            <button onclick="downloadChart('total-pass-fail')">Download Chart</button>
-            <button onclick="downloadCSV('total-pass-fail')">Download CSV</button>
-          </div>
         </article>
       </div>
     </div>
   </section>
+
+  
 
   <script src="../../scripts/utils/navbar.js"></script>
   <script type="module" src="../../scripts/teacher/dashboard.js"></script>

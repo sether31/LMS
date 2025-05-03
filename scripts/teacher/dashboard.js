@@ -29,24 +29,14 @@ const totalModuleLesson = new Chart(document.getElementById('total-module-lesson
 });
 
 
-const quizFailPassModule = new Chart(document.getElementById('quiz-fail-pass-module'), {
+const totalAttempts = new Chart(document.getElementById('total-attempts'), {
   type: 'bar',
   data: {
-    labels: ['Module 1', 'Module 2', 'Module 3', 'Module 4'],
+    labels: ['Course 1', 'Course 2', 'Course 3', 'Course 4'],
     datasets: [
       {
-        label: 'Pass Rate (%)',
+        label: 'Attempts rate (%)',
         data: [85, 70, 60, 90],
-        backgroundColor: 'rgba(247, 242, 238, 1)'
-      },
-      {
-        label: 'Fail Rate (%)',
-        data: [15, 30, 40, 10],
-        backgroundColor: 'rgba(106, 14, 39, 1)'
-      },
-      {
-        label: 'Total attempts',
-        data: [25, 50, 40, 20],
         backgroundColor: 'rgba(106, 14, 39, 1)'
       }
     ]
@@ -55,7 +45,7 @@ const quizFailPassModule = new Chart(document.getElementById('quiz-fail-pass-mod
     plugins: {
       title: {
         display: true,
-        text: 'Quiz Pass/Fail Rate per Module'
+        text: 'Total Attempts Per Course'
       },
       legend: {
         position: 'bottom'
