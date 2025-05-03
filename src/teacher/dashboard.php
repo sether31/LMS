@@ -11,33 +11,91 @@
   $container = mysqli_fetch_array($container);
   $total_students = $container['total_students'];
 
-  $sql2 = "select count(*) as total_courses from course_tb where is_delete = 0";
-  $container2 = mysqli_query($conn, $sql2);
-  $container2 = mysqli_fetch_array($container2);
-  $total_courses = $container2['total_courses'];
+  // publish unpublish course
+  $sql2 = "select count(*) as total_publish_courses from course_tb where is_delete = 0 and status = 'publish'";
+  $total_publish_courses = mysqli_query($conn, $sql2);
+  $total_publish_courses = mysqli_fetch_array($total_publish_courses);
+  $total_publish_courses = $total_publish_courses['total_publish_courses'];
 
-  $sql3 = "select count(*) as total_modules from module_tb where is_delete = 0";
-  $container3 = mysqli_query($conn, $sql3);
-  $container3 = mysqli_fetch_array($container3);
-  $total_modules = $container3['total_modules'];
+  $sql3 = "select count(*) as total_unpublish_courses from course_tb where is_delete = 0 and status = 'unpublish'";
+  $total_unpublish_courses = mysqli_query($conn, $sql3);
+  $total_unpublish_courses = mysqli_fetch_array($total_unpublish_courses);
+  $total_unpublish_courses = $total_unpublish_courses['total_unpublish_courses'];
 
-  $sql4 = "select count(*) as total_lessons from lesson_tb where is_delete = 0";
-  $container = mysqli_query($conn, $sql4);
-  $container = mysqli_fetch_array($container);
-  $total_lessons = $container['total_lessons'];
+  // active inactive module
+  $sql4 = "
+    select count(*) as total_active_modules 
+    from module_tb 
+    inner join course_tb ON module_tb.course_id = course_tb.course_id 
+    where module_tb.is_delete = 0 
+      and course_tb.is_delete = 0
+      and module_tb.status = 'active'
+      and course_tb.status = 'publish'
+  ";
+
+  $total_active_modules = mysqli_query($conn, $sql4);
+  $total_active_modules = mysqli_fetch_array($total_active_modules);
+  $total_active_modules = $total_active_modules['total_active_modules'];
+
+  $sql5 = "
+    select count(*) as total_inactive_modules 
+    from module_tb 
+    inner join course_tb ON module_tb.course_id = course_tb.course_id 
+    where module_tb.is_delete = 0 
+      and course_tb.is_delete = 0
+      and module_tb.status = 'inactive' 
+      and course_tb.status = 'publish' 
+  ";
+  $total_inactive_modules = mysqli_query($conn, $sql5);
+  $total_inactive_modules = mysqli_fetch_array($total_inactive_modules);
+  $total_inactive_modules = $total_inactive_modules['total_inactive_modules'];
+
+  // active lesson and inactive lesson
+  $sql6 = "
+    select count(*) as total_active_lessons
+    from lesson_tb
+    inner join module_tb ON lesson_tb.module_id = module_tb.module_id
+    inner join course_tb ON module_tb.course_id = course_tb.course_id
+    where lesson_tb.is_delete = 0
+      and module_tb.is_delete = 0 
+      and course_tb.is_delete = 0
+      and module_tb.status = 'active'
+      and course_tb.status = 'publish' 
+  ";
+
+  $total_active_lessons = mysqli_query($conn, $sql6);
+  $total_active_lessons = mysqli_fetch_array($total_active_lessons);
+  $total_active_lessons = $total_active_lessons['total_active_lessons'];
+
+  // active lesson and inactive lesson
+  $sql6 = "
+    select count(*) as total_inactive_lessons
+    from lesson_tb
+    inner join module_tb ON lesson_tb.module_id = module_tb.module_id
+    inner join course_tb ON module_tb.course_id = course_tb.course_id
+    where lesson_tb.is_delete = 0
+      and module_tb.is_delete = 0 
+      and course_tb.is_delete = 0
+      and module_tb.status = 'inactive'
+      and course_tb.status = 'publish' 
+  ";
+  $total_inactive_lessons = mysqli_query($conn, $sql6);
+  $total_inactive_lessons = mysqli_fetch_array($total_inactive_lessons);
+  $total_inactive_lessons = $total_inactive_lessons['total_inactive_lessons'];
 
   // CHART
   $sql_courses_modules = "
     select
       course_tb.title, 
-      count(module_tb.module_id) as total_modules, 
-      count(lesson_tb.lesson_id) as total_lessons
-    FROM 
+      COUNT(DISTINCT module_tb.module_id) as total_modules, 
+      COUNT(DISTINCT lesson_tb.lesson_id) as total_lessons
+    from 
       course_tb
     left join 
       module_tb on course_tb.course_id = module_tb.course_id
     left join 
       lesson_tb on module_tb.module_id = lesson_tb.module_id
+    where course_tb.status = 'publish' and module_tb.status = 'active' and course_tb.is_delete = 0 and module_tb.is_delete = 0 and lesson_tb.is_delete = 0
     group by
       course_tb.course_id
   ";
