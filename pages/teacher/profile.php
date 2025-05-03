@@ -6,11 +6,14 @@
     die("Access denied. Please log in.");
   }
 
-  // profile update message
   $session_messages = [
+    // profile update message
     'profile-update-success',
     'profile-update-failed',
-    'profile-update-image-failed'
+    'profile-update-image-failed',
+    // OTP switch message
+    'otp-switch-success',
+    'otp-switch-failed'
   ];
 
   foreach($session_messages as $key){
@@ -130,6 +133,30 @@
           </button>
         </form>
       </article>
+
+
+
+      <?php
+        $sql = "select with_otp from otp_switch_tb where switch_id = 1";
+        $container = mysqli_query($conn, $sql);
+        $container = mysqli_fetch_array($container);
+
+        if($container && isset($container['with_otp'])){
+          $otpEnabled = $container['with_otp'];
+        } else{
+          $otpEnabled = 0; 
+        }
+      ?>
+
+      <form action="../../src/teacher/updateOtpSetting.php" method="post" class="otp-form">
+        <label for="otp-value">
+          <input type="checkbox" name="otp-value" value="1" <?php echo $otpEnabled ? 'checked' : ''; ?>>
+          Require OTP?
+        </label>
+        <button type="submit" title="<?php echo $otpEnabled == 1 ? 'Do you want to turn it off?' : 'Do you want to turn it on?'; ?>">
+          <?php echo $otpEnabled == 1 ? 'OTP OFF' : 'OTP ON'; ?>
+        </button>
+      </form>
     </div>
   </section>
 

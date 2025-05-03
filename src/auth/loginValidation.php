@@ -28,24 +28,46 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' &&
     $role = $container['role'];
     
     if(password_verify($login_password, $hashed_password)){
-      $otp_code = rand(10000, 99999);
-      $expires_at = date('Y-m-d H:i:s', strtotime('+5 minutes'));
-      $purpose = "login";
+      // check if otp is on
+      $result = mysqli_query($conn, "select with_otp from otp_switch_tb where switch_id = 1");
+      if(!$result){
+        die("Query failed: " . mysqli_error($conn)); 
+      }
+      $settings = mysqli_fetch_array($result);
+      $otpEnabled = $settings['with_otp'];
 
-      $sql = "insert into otp_tb (user_id, otp_code, expires_at, purpose) values ('$user_id', '$otp_code', '$expires_at', '$purpose')";
+   
+      if($otpEnabled == 1){
+        $otp_code = rand(10000, 99999);
+        $expires_at = date('Y-m-d H:i:s', strtotime('+5 minutes'));
+        $purpose = "login";
 
-      $container = mysqli_query($conn, $sql);
+        $sql = "insert into otp_tb (user_id, otp_code, expires_at, purpose) values ('$user_id', '$otp_code', '$expires_at', '$purpose')";
+        mysqli_query($conn, $sql);
 
-      $_SESSION['pending-user'] = [
-        'user_id' => $user_id,
-        'name' => $name,
-        'email' => $email,
-        'role' => $role
-      ];
+        $_SESSION['pending-user'] = [
+          'user_id' => $user_id,
+          'name' => $name,
+          'email' => $email,
+          'role' => $role
+        ];
+        $_SESSION['otp-pop'] = true;
 
-      $_SESSION['otp-pop'] = true;
+        sendOTP($email, $otp_code, $name, $purpose, $expires_at);
+      } else{
+        // if off otp skip
+        $_SESSION['user-id'] = $user_id;
+        $_SESSION['user-name'] = $name;
+        $_SESSION['user-email'] = $email;
+        $_SESSION['user-role'] = $role;
 
-      sendOTP($email, $otp_code, $name, $purpose, $expires_at);
+        if ($role === 'teacher') {
+          header("Location: ../../pages/teacher/dashboard.php");
+        } else {
+          header("Location: ../../pages/student/dashboard.php");
+        }
+        exit();
+      }
     } else{
       $_SESSION['password-error'] = "Incorrect password!";
     }
