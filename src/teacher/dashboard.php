@@ -26,7 +26,7 @@
   $sql4 = "
     select count(*) as total_active_modules 
     from module_tb 
-    inner join course_tb ON module_tb.course_id = course_tb.course_id 
+    inner join course_tb on module_tb.course_id = course_tb.course_id 
     where module_tb.is_delete = 0 
       and course_tb.is_delete = 0
       and module_tb.status = 'active'
@@ -40,7 +40,7 @@
   $sql5 = "
     select count(*) as total_inactive_modules 
     from module_tb 
-    inner join course_tb ON module_tb.course_id = course_tb.course_id 
+    inner join course_tb on module_tb.course_id = course_tb.course_id 
     where module_tb.is_delete = 0 
       and course_tb.is_delete = 0
       and module_tb.status = 'inactive' 
@@ -54,8 +54,8 @@
   $sql6 = "
     select count(*) as total_active_lessons
     from lesson_tb
-    inner join module_tb ON lesson_tb.module_id = module_tb.module_id
-    inner join course_tb ON module_tb.course_id = course_tb.course_id
+    inner join module_tb on lesson_tb.module_id = module_tb.module_id
+    inner join course_tb on module_tb.course_id = course_tb.course_id
     where lesson_tb.is_delete = 0
       and module_tb.is_delete = 0 
       and course_tb.is_delete = 0
@@ -71,8 +71,8 @@
   $sql6 = "
     select count(*) as total_inactive_lessons
     from lesson_tb
-    inner join module_tb ON lesson_tb.module_id = module_tb.module_id
-    inner join course_tb ON module_tb.course_id = course_tb.course_id
+    inner join module_tb on lesson_tb.module_id = module_tb.module_id
+    inner join course_tb on module_tb.course_id = course_tb.course_id
     where lesson_tb.is_delete = 0
       and module_tb.is_delete = 0 
       and course_tb.is_delete = 0
@@ -83,19 +83,25 @@
   $total_inactive_lessons = mysqli_fetch_array($total_inactive_lessons);
   $total_inactive_lessons = $total_inactive_lessons['total_inactive_lessons'];
 
-  // CHART
+
+
+  // course module chapter
   $sql_courses_modules = "
     select
       course_tb.title, 
-      COUNT(DISTINCT module_tb.module_id) as total_modules, 
-      COUNT(DISTINCT lesson_tb.lesson_id) as total_lessons
+      count(distinct module_tb.module_id) as total_modules, 
+      count(distinct lesson_tb.lesson_id) as total_lessons
     from 
       course_tb
     left join 
       module_tb on course_tb.course_id = module_tb.course_id
     left join 
       lesson_tb on module_tb.module_id = lesson_tb.module_id
-    where course_tb.status = 'publish' and module_tb.status = 'active' and course_tb.is_delete = 0 and module_tb.is_delete = 0 and lesson_tb.is_delete = 0
+    where course_tb.status = 'publish' 
+      and module_tb.status = 'active' 
+      and course_tb.is_delete = 0 
+      and module_tb.is_delete = 0 
+      and lesson_tb.is_delete = 0
     group by
       course_tb.course_id
   ";
@@ -115,7 +121,44 @@
     ];
   }
 
-  echo "<script> 
-    const coursesData = " . json_encode($courses_data) . ";
-  </script>";
+  echo "
+    <script> 
+      const coursesData = " . json_encode($courses_data) . ";
+    </script>
+  ";
+
+
+  // attempts chart
+  $sql_attempts = "
+    select  
+      course_tb.title, 
+      SUM(CASE WHEN quiz_result_tb.attempts IS NOT NULL THEN quiz_result_tb.attempts ELSE 0 END) AS total_attempts
+    from 
+      course_tb
+    left join 
+      module_tb on module_tb.course_id = course_tb.course_id
+    left join 
+      quiz_result_tb on quiz_result_tb.module_id = module_tb.module_id
+    where 
+      course_tb.is_delete = 0
+      and module_tb.is_delete = 0
+    GROUP BY 
+        course_tb.course_id;
+  ";
+
+  $attempts = mysqli_query($conn, $sql_attempts);
+  $attemptData = [];
+
+  while($row = mysqli_fetch_assoc($attempts)){
+    $attemptData[] = [
+      'title' => $row['title'],
+      'total_attempts' => $row['total_attempts']
+    ];
+  }
+
+  echo "
+    <script> 
+      const attemptData = " . json_encode($attemptData) . ";
+    </script>
+  ";
 ?>

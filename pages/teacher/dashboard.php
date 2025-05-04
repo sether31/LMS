@@ -92,10 +92,6 @@
         <article class="box chart-box">
           <canvas id="total-attempts"></canvas>
         </article>
-
-        <article class="box chart-box">
-          <canvas id="total-pass-fail"></canvas>
-        </article>
       </div>
     </div>
   </section>
