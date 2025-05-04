@@ -74,22 +74,18 @@
 
 
    // Get the passing score from the quiz_tb
-   $sql3 = "SELECT passing_score FROM quiz_tb WHERE module_id = $module_id";
+   $sql3 = "select passing_score from quiz_tb where module_id = $module_id";
    $result3 = mysqli_query($conn, $sql3);
 
    $passing_score = 0;
    if(mysqli_num_rows($result3) > 0){
-     $passing_score = mysqli_fetch_array($result3)['passing_score'];
+      $passing_score = mysqli_fetch_array($result3)['passing_score'];
    }
 
 
   if ($score >= $passing_score) {
-    $update_module = "
-      UPDATE module_tb 
-      SET is_pass = 1 
-      WHERE module_id = $module_id
-    ";
-    mysqli_query($conn, $update_module);
+    $passed_module = "insert into module_completion_tb (user_id, module_id) values ('$user_id', '$module_id')";
+    mysqli_query($conn, $passed_module);
     $_SESSION['quiz-pass'] = "You passed the quiz with the score percentage of $score";
   } else{
     $_SESSION['quiz-fail'] = "You failed. please try again to unlock the next module.";
