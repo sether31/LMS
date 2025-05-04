@@ -80,9 +80,65 @@
       </div>
 
 
-      <h2 class="header">
-        &#10070; Chart
-      </h2>
+      <div class="btns">
+        <h2 class="header">
+          &#10070; Chart
+        </h2>
+
+        <div class="download">
+          <!-- download all -->
+          <form action="../../../src/student/completeLesson.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
+            <input type="hidden" name="course-id" value="">
+            <input type="hidden" name="module-id" value="">
+            <input type="hidden" name="lesson-id" value="">
+            <button type="submit">
+              <span>
+                <img src="../../assets/images/icons/icon-download.svg" alt="">
+                Export all
+              </span>
+            </button>
+          </form>
+
+          <!-- download data -->
+          <form action="../../../src/student/completeLesson.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
+            <input type="hidden" name="course-id" value="">
+            <input type="hidden" name="module-id" value="">
+            <input type="hidden" name="lesson-id" value="">
+            <button type="submit">
+              <span>
+                <img src="../../assets/images/icons/icon-download.svg" alt="">
+                Card Data
+              </span>
+            </button>
+          </form>
+
+          <!-- download module & lesson chart -->
+          <form action="../../../src/student/completeLesson.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
+            <input type="hidden" name="course-id" value="">
+            <input type="hidden" name="module-id" value="">
+            <input type="hidden" name="lesson-id" value="">
+            <button type="submit">
+              <span>
+                <img src="../../assets/images/icons/icon-download.svg" alt="">
+                Module/Lesson Chart
+              </span>
+            </button>
+          </form>
+
+          <!-- download quiz attempts -->
+          <form action="../../../src/student/completeLesson.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
+            <input type="hidden" name="course-id" value="">
+            <input type="hidden" name="module-id" value="">
+            <input type="hidden" name="lesson-id" value="">
+            <button type="submit">
+              <span>
+                <img src="../../assets/images/icons/icon-download.svg" alt="">
+                Quiz attempts
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
 
       <div class="chart-container">
         <article class="box chart-box">
