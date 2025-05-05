@@ -138,12 +138,14 @@
           <?php
             $sql = "select * from course_tb where course_id = '$get_course_id'";
             $container = mysqli_query($conn, $sql);
+            $course_status;
 
             if(mysqli_num_rows($container) > 0){
               $container = mysqli_fetch_array($container);
               $course_title = $container['title'];
               $course_description = $container['description'];
               $course_picture = $container['course_image'];
+              $course_status = $container['status'];
             } else{
                 header('Location: ../../../pages/teacher/course.php?courseId=$get_course_id');
                 exit();
@@ -327,9 +329,12 @@
 
             if(mysqli_num_rows($container) > 0):
               $container = mysqli_fetch_array($container);
+
+              $new_status = ($course_status === 'publish') ? 'unpublish' : 'publish';
           ?>
 
-          <form action="../../../src/teacher/courseStatus.php" method="POST" onsubmit="return confirm('Are you sure you want to publish this course?');" class="publish-course-form">
+
+          <form action="../../../src/teacher/courseStatus.php" method="POST" onsubmit="return confirm('Are you sure you want to <?php echo $new_status; ?> <?php echo $course_title; ?>?');" class="publish-course-form">
             <input type="hidden" name="course-id" value="<?php echo $get_course_id ?>">
             <input type="hidden" name="course-status" value="<?php echo $container['status'] ?>">
 
