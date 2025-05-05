@@ -11,7 +11,7 @@
     $course_title = $_POST['course-title'];
     $student_id = $_POST['student-id'];
 
-    $sql = "select * from student_course_tb where student_id = '$student_id' and course_id = '$course_id' and is_delete = 0";
+    $sql = "select * from student_course_tb where student_id = '$student_id' and course_id = '$course_id'";
     $container = mysqli_query($conn, $sql);
 
     if(mysqli_num_rows($container) > 0){
