@@ -57,8 +57,39 @@
       }
     }
     
-    & .header{
+    & .btns{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-block: 3rem;
+
+      & .download{
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        
+        & form button{
+          padding: .8rem 1rem;
+          border: none;
+          background-color: var(--secondary);
+          color: var(--white);
+          border-radius: .3rem;
+          transition: .3s ease-in-out;
+
+          & span{
+            display: flex;
+            gap: .5rem;
+
+            & img{
+              width: var(--text-md);
+            }
+          }
+
+          &:hover{
+            background-color: var(--tertiary)
+          }
+        }
+      }
     }
     
     & .chart-container{
@@ -72,8 +103,8 @@
         height: calc(100% - 50px);;
 
         & canvas{
-          width: 100% !important;
-          height: 100% !important;
+          width: 100%!important;
+          height: 100%!important;
         }
 
         & .download-btn{
@@ -84,7 +115,7 @@
           margin-top: 2rem;
 
           & button{
-            padding: .5rem 1rem;
+            padding: .8rem 1rem;
             background-color: var(--secondary);
             color: white;
             border: none;
@@ -134,7 +165,41 @@
       }
     }
   }
+
+  .container-xl .wrapper .btns{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-block: 3rem 5rem;
+
+    & .header{
+      margin-block: 0;
+      font-size: var(--text-lg);
+    }
+  }
 }
+
+@media(max-width: 546px){
+
+  .container-xl .wrapper .btns .download{
+    flex-direction: column;
+    align-items: unset;
+    width: 100%;
+
+    & form button{
+      width: 100%;
+      border-radius: .3rem;
+
+      & span{
+        justify-content: center;
+      }
+    }
+  }
+}
+
+
+
 
 
 

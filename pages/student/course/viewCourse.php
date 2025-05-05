@@ -184,7 +184,7 @@
           ?>
 
 
-          <form action="../../../src/fpdf/downloadCertificate.php" method="post">
+          <form action="../../../src/fpdf/downloadCertificate.php" method="post" class="cert-dl-form">
             <input type="hidden" name="user-name" value="<?php echo $name ?>">
             <input type="hidden" name="course-title" value="<?php echo $title ?>">
             <input type="hidden" name="course-id" value="<?php echo $get_course_id; ?>">

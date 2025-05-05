@@ -252,7 +252,16 @@ body{
   color: var(--gray);
 }
 
-
+.cert-dl-form button{
+  display: block;
+  margin: 3rem auto 0 ;
+  padding: .8rem 1rem;
+  border: none;
+  border-radius: .5rem;
+  background-color: var(--secondary);
+  color: var(--white);
+  transition: .3s ease-in-out;
+}
 
 
 

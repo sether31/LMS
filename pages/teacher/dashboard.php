@@ -85,12 +85,27 @@
           &#10070; Chart
         </h2>
 
+        <?php 
+          $courses_data = htmlspecialchars(json_encode($courses_data));
+          $attemptData = htmlspecialchars(json_encode($attemptData));
+        ?>
+
         <div class="download">
           <!-- download all -->
-          <form action="../../../src/student/completeLesson.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
-            <input type="hidden" name="course-id" value="">
-            <input type="hidden" name="module-id" value="">
-            <input type="hidden" name="lesson-id" value="">
+          <form action="../../src/fpdf/exportAllPdf.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
+            <!-- course data -->
+            <input type="hidden" name="course-data" value="<?php echo $courses_data; ?>">
+            <!-- quiz data -->
+            <input type="hidden" name="quiz-data" value="<?php echo $attemptData; ?>">
+            <!-- statistics data -->
+            <input type="hidden" name="total-students" value="<?php echo $total_students; ?>">
+            <input type="hidden" name="total-publish-courses" value="<?php echo $total_publish_courses; ?>">
+            <input type="hidden" name="total-unpublish-courses" value="<?php echo $total_unpublish_courses; ?>">
+            <input type="hidden" name="total-active-modules" value="<?php echo $total_active_modules; ?>">
+            <input type="hidden" name="total-inactive-modules" value="<?php echo $total_inactive_modules; ?>">
+            <input type="hidden" name="total-active-lessons" value="<?php echo $total_active_lessons; ?>">
+            <input type="hidden" name="total-inactive-lessons" value="<?php echo $total_inactive_lessons; ?>">
+
             <button type="submit">
               <span>
                 <img src="../../assets/images/icons/icon-download.svg" alt="">
@@ -99,24 +114,28 @@
             </button>
           </form>
 
-          <!-- download data -->
-          <form action="../../../src/student/completeLesson.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
-            <input type="hidden" name="course-id" value="">
-            <input type="hidden" name="module-id" value="">
-            <input type="hidden" name="lesson-id" value="">
+          <!-- export all data -->
+          <form action="../../src/fpdf/statsPdf.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
+            <input type="hidden" name="total-students" value="<?php echo $total_students; ?>">
+            <input type="hidden" name="total-publish-courses" value="<?php echo $total_publish_courses; ?>">
+            <input type="hidden" name="total-unpublish-courses" value="<?php echo $total_unpublish_courses; ?>">
+            <input type="hidden" name="total-active-modules" value="<?php echo $total_active_modules; ?>">
+            <input type="hidden" name="total-inactive-modules" value="<?php echo $total_inactive_modules; ?>">
+            <input type="hidden" name="total-active-lessons" value="<?php echo $total_active_lessons; ?>">
+            <input type="hidden" name="total-inactive-lessons" value="<?php echo $total_inactive_lessons; ?>">
+        
+
             <button type="submit">
               <span>
                 <img src="../../assets/images/icons/icon-download.svg" alt="">
-                Card Data
+                Dashboard Data
               </span>
             </button>
           </form>
 
           <!-- download module & lesson chart -->
-          <form action="../../../src/student/completeLesson.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
-            <input type="hidden" name="course-id" value="">
-            <input type="hidden" name="module-id" value="">
-            <input type="hidden" name="lesson-id" value="">
+          <form action="../../src/fpdf/moduleLessonChartPdf.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
+            <input type="hidden" name="course-data" value="<?php echo $courses_data; ?>">
             <button type="submit">
               <span>
                 <img src="../../assets/images/icons/icon-download.svg" alt="">
@@ -126,10 +145,8 @@
           </form>
 
           <!-- download quiz attempts -->
-          <form action="../../../src/student/completeLesson.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
-            <input type="hidden" name="course-id" value="">
-            <input type="hidden" name="module-id" value="">
-            <input type="hidden" name="lesson-id" value="">
+          <form action="../../src/fpdf/totalQuizAttemptsChartPdf.php" method="post" class="complete-lesson-form" onsubmit="return confirm('Are you sure you finish reading <?php echo $lesson_title; ?>?');">
+            <input type="hidden" name="quiz-data" value="<?php echo $attemptData; ?>">
             <button type="submit">
               <span>
                 <img src="../../assets/images/icons/icon-download.svg" alt="">
