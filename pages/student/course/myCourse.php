@@ -56,7 +56,7 @@
         <a href="../dashboard.php">Dashboard</a>
         <a class="active">My Courses</a>
         <a href="../profile.php">Profile</a>
-        <a href="../../src/auth/logout.php">Logout</a>
+        <a href="../../../src/auth/logout.php">Logout</a>
       </nav>
     </section>
   </header>
@@ -132,7 +132,7 @@
                 <article class='card'>
                   <p class='publish'>{$status}</p>
                   <div class='card-image'>
-                    <a href=''>
+                    <a href='./viewCourse.php?courseId=$course_id' class='card-title'>
                       <img src='../../../{$course_picture}' alt='course_picture'>
                     </a>
                   </div>

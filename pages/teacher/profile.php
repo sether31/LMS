@@ -154,7 +154,7 @@
           Require OTP?
         </label>
         <button type="submit" title="<?php echo $otpEnabled == 1 ? 'Do you want to turn it off?' : 'Do you want to turn it on?'; ?>">
-          <?php echo $otpEnabled == 1 ? 'OTP OFF' : 'OTP ON'; ?>
+          Save
         </button>
       </form>
     </div>

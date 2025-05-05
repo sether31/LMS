@@ -142,8 +142,9 @@
     where 
       course_tb.is_delete = 0
       and module_tb.is_delete = 0
-    GROUP BY 
-        course_tb.course_id;
+      and course_tb.status = 'publish'
+    group by 
+      course_tb.course_id;
   ";
 
   $attempts = mysqli_query($conn, $sql_attempts);

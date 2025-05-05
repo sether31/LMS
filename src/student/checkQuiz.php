@@ -86,7 +86,7 @@
   if ($score >= $passing_score) {
     $passed_module = "insert into module_completion_tb (user_id, module_id) values ('$user_id', '$module_id')";
     mysqli_query($conn, $passed_module);
-    $_SESSION['quiz-pass'] = "You passed the quiz with the score percentage of $score";
+    $_SESSION['quiz-pass'] = "You passed the quiz with the score of $correct_answers";
   } else{
     $_SESSION['quiz-fail'] = "You failed. please try again to unlock the next module.";
   }

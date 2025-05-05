@@ -105,3 +105,12 @@ body{
     border: none;
   }
 }
+
+
+@media screen and (max-width: 769px){
+  .card-container{
+    flex-direction: column;
+    align-items: unset;
+    width: 100%; 
+  }
+}
