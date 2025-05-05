@@ -10,8 +10,8 @@ $get_course_id = $_GET['courseId'];
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $module_id = $_POST['module-id'];
-  $lesson_title = trim($_POST['lesson-title']);
-  $lesson_content = trim($_POST['lesson-content']);
+  $lesson_title = mysqli_real_escape_string($conn, trim($_POST['lesson-title']));
+  $lesson_content = mysqli_real_escape_string($conn, trim($_POST['lesson-content']));
 
   $sql = "insert into lesson_tb (module_id, title, content) values ('$module_id', '$lesson_title', '$lesson_content')";
   $container = mysqli_query($conn, $sql);
@@ -36,13 +36,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
           mysqli_query($conn, $sql);
         } else{
           $_SESSION['lesson-create-image-failed'] = "Failed to upload the image. Please try again.";
-          //header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
-          //exit();
+          header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
+          exit();
         }
       } else{
         $_SESSION['lesson-create-image-failed'] = "Image is too large (max 15MB).";
-        //header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
-        //exit();
+        header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
+        exit();
       }
     }
 
@@ -61,23 +61,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
           mysqli_query($conn, $sql);
         } else{
           $_SESSION['lesson-create-video-failed'] = "Failed to upload the video. Please try again.";
-          //header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
-          //exit();
+          header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
+          exit();
         }
       } else{
         $_SESSION['lesson-create-video-failed'] = "Video is too large (max 100MB).";
-        //header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
-        //exit();
+        header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
+        exit();
       }
     }
 
     $_SESSION['lesson-create-success'] = "Lesson created successfully!";
-    //header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
-    //exit();
+    header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
+    exit();
   } else{
     $_SESSION['lesson-create-error'] = "Create lesson failed.";
-    //header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
-    //exit();
+    header("Location: ../../pages/teacher/course/viewLesson.php?courseId=$get_course_id&moduleId=$module_id");
+    exit();
   }
 }
 ?>

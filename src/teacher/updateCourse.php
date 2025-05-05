@@ -9,8 +9,8 @@
   $get_course_id = $_GET['courseId'];
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $update_course_title = $_POST['update-course-title'];
-    $update_course_description = $_POST['update-course-description'];
+    $update_course_title = mysqli_real_escape_string($conn, trim($_POST['update-course-title']));
+    $update_course_description = mysqli_real_escape_string($conn, trim($_POST['update-course-description']));
 
     $sql = "update course_tb set title = '$update_course_title', description = '$update_course_description' where course_id = '$get_course_id'";
     if(mysqli_query($conn, $sql)) {

@@ -11,8 +11,8 @@
 
   if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $user_id = $_SESSION['user-id'];
-    $course_title = $_POST['course-title'];
-    $course_description = $_POST['course-description'];
+    $course_title = mysqli_real_escape_string($conn, trim($_POST['course-title']));
+    $course_description = mysqli_real_escape_string($conn, trim($_POST['course-description']));
 
     $check_image = NULL;
 

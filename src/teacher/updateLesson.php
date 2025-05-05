@@ -11,8 +11,8 @@ $get_module_id = $_GET['moduleId'];
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $lesson_id = $_POST['lesson-id'];
-  $update_lesson_title = trim($_POST['update-lesson-title']);
-  $update_lesson_content = trim($_POST['update-lesson-content']);
+  $update_lesson_title = mysqli_real_escape_string($conn, trim($_POST['update-lesson-title']));
+  $update_lesson_content = mysqli_real_escape_string($conn, trim($_POST['update-lesson-content']));
 
   $stmt = $conn->prepare("UPDATE lesson_tb SET title = ?, content = ? WHERE lesson_id = ?");
   $stmt->bind_param("ssi", $update_lesson_title, $update_lesson_content, $lesson_id);

@@ -9,8 +9,8 @@ if(!isset($_SESSION['user-id'])){
 $get_course_id = $_GET['courseId'];
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-  $module_title = trim($_POST['module-title']);
-  $module_description = trim($_POST['module-description']);
+  $module_title = mysqli_real_escape_string($conn, trim($_POST['module-title']));
+  $module_description = mysqli_real_escape_string($conn, trim($_POST['module-description']));
 
   $sql = "insert into module_tb (course_id, title, description) values ('$get_course_id', '$module_title','$module_description')";
 

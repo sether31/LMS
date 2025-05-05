@@ -17,7 +17,7 @@
     $module_id = $get_module_id;
     $question_count = (int)$_POST['question-count'];
     $passing_score = (int)$_POST['passing-score'];
-    $quiz_title = $_POST['quiz-title'];
+    $quiz_title = mysqli_real_escape_string($conn, trim($_POST['quiz-title']));
 
     if(!$module_id || $question_count <= 0 || $passing_score < 0 || $passing_score > 100){
       echo "Invalid module ID, question count, or passing score.";
@@ -40,12 +40,12 @@
       $quiz_id = mysqli_insert_id($conn);
 
       for($i = 1; $i <= $question_count; $i++){
-        $question = $_POST["question-$i"];
-        $choice_a = $_POST["choice-$i-a"];
-        $choice_b = $_POST["choice-$i-b"];
-        $choice_c = $_POST["choice-$i-c"];
-        $choice_d = $_POST["choice-$i-d"];
-        $correct = mysqli_real_escape_string($conn, $_POST["answer-$i"]);
+        $question = mysqli_real_escape_string($conn, trim($_POST["question-$i"]));
+        $choice_a = mysqli_real_escape_string($conn, trim($_POST["choice-$i-a"]));
+        $choice_b = mysqli_real_escape_string($conn, trim($_POST["choice-$i-b"]));
+        $choice_c = mysqli_real_escape_string($conn, trim($_POST["choice-$i-c"]));
+        $choice_d = mysqli_real_escape_string($conn, trim($_POST["choice-$i-d"]));
+        $correct = mysqli_real_escape_string($conn, trim($_POST["answer-$i"]));
 
         $insert_question = "INSERT INTO quiz_question_tb (quiz_id, question_text, choice_a, choice_b, choice_c, choice_d) VALUES ('$quiz_id', '$question', '$choice_a', '$choice_b', '$choice_c', '$choice_d')";
         $result_question = mysqli_query($conn, $insert_question);

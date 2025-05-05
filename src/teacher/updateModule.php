@@ -10,8 +10,8 @@
 
   if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $module_id = $_POST['module-id'];
-    $module_title = trim($_POST['update-module-title']);
-    $module_description = trim($_POST['update-module-description']);
+    $module_title = mysqli_real_escape_string($conn, trim($_POST['update-module-title']));
+    $module_description = mysqli_real_escape_string($conn, trim($_POST['update-module-description']));
 
     $sql = "update module_tb set title = '$module_title', description = '$module_description' where module_id = '$module_id'";
     
