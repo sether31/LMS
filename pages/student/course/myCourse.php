@@ -95,7 +95,8 @@
               course_tb c on sc.course_id = c.course_id
             where 
               sc.student_id = $user_id and
-              sc.status != 'withdrawn'
+              sc.status != 'withdrawn' and
+              c.is_delete = 0
             order by 
               sc.enrolled_at asc
           ";
