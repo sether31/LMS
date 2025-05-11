@@ -15,7 +15,7 @@
 3. **Create lessons under modules**
 4. **Publish and unpublish courses**
 5. **Recover deleted courses**
-6. **Create quiz every module before allowing user to go to next module**
+6. **Create quiz every module before allowing user to go to next module (prerequisite: finish all lesson -> take quiz -> pass -> unlock next module -> download certificate)**
 7. **Generate certificate**
 
 ## Installation
@@ -31,8 +31,13 @@ git clone git@github.com:sether31/Kitchenomachia-Academy.git
 npm install
 ```
 
-#### 3. **Set up a local server with XAMPP:**
+#### 3. **Import the database:**
 - Launch your XAMPP and start your Apache and MySql.
+- Open admin and create database name "kitchenomachia_academydb".
+- Select the database, click import and select the kitchenomachia_academydb.sql file and save it.
+
+#### 4. **Set up a local server with XAMPP:**
+- After Launching your XAMPP.
 - Place the Kitchenomachia-Academy project folder inside the htdocs directory of your XAMPP installation (this is found in C:\xampp\htdocs).
 - Finally, Open your browser and go to http://localhost/Kitchenomachia-Academy/index.php to access the platform locally.
 
