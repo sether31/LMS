@@ -25,9 +25,9 @@
         <h3>Create Lesson</h3>
       </legend>
 
-      <form method="POST" action="../../../src/teacher/createLesson.php?courseId=<?php echo $get_course_id?>" enctype="multipart/form-data">
+      <form method="POST" action="../../../src/teacher/createLesson.php?courseId=<?php echo $get_course_id?>&moduleId=<?php echo $get_module_id ?>" enctype="multipart/form-data">
         
-        <input type="hidden" name="module-id" value="<?php echo $get_module_id; ?>">
+        <input type="hidden" name="module-id" value="<?php echo htmlspecialchars($get_module_id); ?>">
         
         <div class="image">
           <label for="lesson-image">Upload Image (10MB):</label>

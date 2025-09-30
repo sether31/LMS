@@ -21,6 +21,7 @@
     // Lesson create
     'lesson-create-success',
     'lesson-create-failed',
+    'lesson-create-error',
     'lesson-create-video-failed',
     'lesson-create-success-failed',
   
