@@ -13,10 +13,10 @@
     <article class="flex-container container-md">
       <div class="login-left-section">
         <div class="text">
-          <img src="../../assets/images/logo/logo-w-text.png" alt="logo" id="logo">
-          <h1 class="header">Welcome back, Chef!</h1>
+          <img src="../../assets/images/logo/logo.png" alt="logo" id="logo">
+          <h1 class="header">Welcome back!</h1>
           <i class="sub-header">
-            One <span>module</span> at a time, one <span>flavor</span> at a time. <span >Let’s rise!</span>
+            One <span>module</span> at a time, one <span>skill</span> at a time. <span >Let’s rise!</span>
           </i>
         </div>
 
@@ -71,7 +71,7 @@
         </form>
       </div>
       <div class="login-right-section">
-        <img src="../../assets/images/ka-poster.jpeg" alt="ka-poster">
+        <img src="../../assets/images/lms-poster.png" alt="lms-poster">
       </div> 
     </article>
   </section>

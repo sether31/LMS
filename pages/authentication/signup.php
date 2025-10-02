@@ -12,11 +12,11 @@
   <section class="signup-container">
     <article class="flex-container container-md">
       <div class="signup-left-section">
-        <img src="../../assets/images/ka-poster.jpeg" alt="ka-poster">
+        <img src="../../assets/images/lms-poster.png" alt="lms-poster">
       </div>
       <div class="signup-right-section">
         <div class="text">
-          <img src="../../assets/images/logo/logo-w-text.png" alt="logo" id="logo">
+          <img src="../../assets/images/logo/logo.png" alt="logo" id="logo">
           <h2 class="header">Create an account</h2>
         </div>
 
