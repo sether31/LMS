@@ -19,12 +19,12 @@
       $email->Port = 587;
 
       // recipient
-      $email->setFrom("kitchenomachiaacademy@gmail.com","Kitchenomachia Academy");
+      $email->setFrom("kitchenomachiaacademy@gmail.com","Learning Management System");
       $email->addAddress($to_email, $name);
 
       // content
       $email->isHTML(true);
-      $email->Subject = "Kitchenomachia Academy " . strtoupper($purpose) . " OTP Code";
+      $email->Subject = "Learning Management System " . strtoupper($purpose) . " OTP Code";
       $email->Body = "
         <p>Hello <strong>$name</strong>,</p>
         <p>
@@ -36,7 +36,7 @@
         <p>
           Best regards,
           <br>
-          Kitchenomachia Academy
+          LMS
         </p>
       ";
 

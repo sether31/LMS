@@ -13,22 +13,22 @@
     
     $courseLength = strlen($course_title);
     if($courseLength <= 10){
-      $courseFontSize = 20;
+      $courseFontSize = 25;
     } else if($courseLength <= 20){
-      $courseFontSize = 16;
+      $courseFontSize = 20;
     } else if($courseLength <= 30){
-      $courseFontSize = 12;
+      $courseFontSize = 16;
     } else{
       $courseFontSize = 10;
     };
       
     $pdf->AddPage();
-    $pdf->Image('../../assets/images/certificate-template.png', 0, 0, 297, 210);
+    $pdf->Image('../../assets/images/cert-template.png', 0, 0, 297, 210);
     $pdf->SetFont('Arial', 'B', 28);
     $pdf->SetTextColor(0, 0, 0);
     $pdf->SetXY(0, 120);
-    $pdf->Cell(297, -15, $upCourse, 0, 1, 'C');
-    $pdf->SetFont('Arial', 'B', 20);
+    $pdf->Cell(297, -15, $upName, 0, 1, 'C');
+    $pdf->SetFont('Arial', 'B', $courseFontSize);
     $pdf->Cell(405, 51, $upCourse, 0, 1, 'C');
     
     $pdf->Output('D', $user_name . ' Certificate.pdf');
@@ -36,7 +36,7 @@
     header("Location: ../../pages/student/viewCourse.php?courseId=$course_id");
     exit();
   } else{
-    $_SESSION['failed-to-download-cert'] = 'Failed tom download certificate. please try again.';
+    $_SESSION['failed-to-download-cert'] = 'Failed to download certificate. please try again.';
     header("Location: ../../pages/student/viewCourse.php?courseId=$course_id");
     exit();
   }
