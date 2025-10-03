@@ -67,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $container = mysqli_query($conn , $sql);
 
   if($container){
-    $_SESSION['register-success'] = "Let’s get cooking! Your account is ready🍽";
+    $_SESSION['register-success'] = "Let’s get started! Your account is ready";
     header("Location: ../../pages/authentication/login.php");
     exit();
   } else{
