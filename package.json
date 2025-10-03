@@ -1,7 +1,7 @@
 {
-  "name": "kitchenomachia-academy",
+  "name": "Learning Management System",
   "version": "1.0.0",
-  "description": "Kitchenomachia Academy is an online culinary classroom and can unlock your cooking potential with interactive courses, self-paced lessons, and fun quizzes. Complete a course and earn a certificate, and show the world you're a good chef!👨‍🍳🏆",
+  "description": "Learning Management System",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
@@ -11,9 +11,7 @@
     "recipe",
     "tutorial",
     "learning",
-    "online",
-    "culinary",
-    "cooking"
+    "online"
   ],
   "author": "Seth Hernandez <sethmichaelhernandez@gmail.com>",
   "license": "MIT",

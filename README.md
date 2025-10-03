@@ -22,7 +22,7 @@
 
 #### 1. **Clone the repository:**
 ```cmd
-git clone git@github.com:sether31/Kitchenomachia-Academy.git
+git clone https://github.com/sether31/LMS.git
 ```
 
 #### 2. **Install dependencies:**
@@ -33,8 +33,8 @@ npm install
 
 #### 3. **Import the database:**
 - Launch your XAMPP and start your Apache and MySql.
-- Open admin and create database name "kitchenomachia_academydb".
-- Select the database, click import and select the kitchenomachia_academydb.sql file and save it.
+- Open admin and create database name "lms_db".
+- Select the database, click import and select the lms_db.sql file and save it.
 
 #### 4. **Set up a local server with XAMPP:**
 - After Launching your XAMPP.
