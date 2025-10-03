@@ -28,7 +28,7 @@
       </article>
 
       <article class="logo">
-        <img src="../../../assets/images/logo/logo-w-text.png" alt="logo">
+        <img src="../../../assets/images/logo/logo.png" alt="logo">
       </article>
 
       <nav class="nav">
