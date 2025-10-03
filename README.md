@@ -1,6 +1,4 @@
-# Kitchenomachia Academy!
-
-* Kitchenomachia Academy is an online culinary classroom and can unlock your cooking potential with interactive courses, self-paced lessons, and fun quizzes. Complete a course and earn a certificate, and show the world you're a good chef!👨‍🍳🏆
+# Learning Management System
 
 ## User Features
 1. **Enroll in a course**
@@ -34,12 +32,12 @@ npm install
 #### 3. **Import the database:**
 - Launch your XAMPP and start your Apache and MySql.
 - Open admin and create database name "lms_db".
-- Select the database, click import and select the lms_db.sql file and save it.
+- Select the database, click import and select the lms_db.sql file inside of db folder and save it.
 
 #### 4. **Set up a local server with XAMPP:**
 - After Launching your XAMPP.
-- Place the Kitchenomachia-Academy project folder inside the htdocs directory of your XAMPP installation (this is found in C:\xampp\htdocs).
-- Finally, Open your browser and go to http://localhost/Kitchenomachia-Academy/index.php to access the platform locally.
+- Place the LMS project folder inside the htdocs directory of your XAMPP installation (this is found in C:\xampp\htdocs).
+- Finally, Open your browser and go to http://localhost/LMS/index.php to access the platform locally.
 
 ## Technologies Used
 #### Frontend
