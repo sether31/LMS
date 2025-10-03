@@ -2,7 +2,7 @@
   $host = "localhost";
   $username = "root";
   $password = "";        
-  $dbname = "kitchenomachia_academydb";
+  $dbname = "lms_db";
 
   $conn = mysqli_connect($host, $username, $password, $dbname);
 
